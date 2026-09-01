@@ -1,0 +1,468 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Time Check 1.0 — 55 Hour Week Tracker</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    background: #0f0f13;
+    color: #f0f0f0;
+    font-family: 'Segoe UI', system-ui, sans-serif;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 28px 16px;
+  }
+
+  h1 {
+    font-size: 1.5rem;
+    font-weight: 700;
+    letter-spacing: 0.05em;
+    color: #fff;
+    margin-bottom: 4px;
+  }
+
+  .subtitle {
+    font-size: 0.85rem;
+    color: #888;
+    margin-bottom: 28px;
+  }
+
+  /* ── Big progress ring ── */
+  .ring-wrap {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 28px;
+  }
+
+  .ring-container {
+    position: relative;
+    width: 180px;
+    height: 180px;
+  }
+
+  .ring-container svg {
+    transform: rotate(-90deg);
+  }
+
+  .ring-bg { fill: none; stroke: #2a2a35; stroke-width: 14; }
+  .ring-fill {
+    fill: none;
+    stroke: #4ade80;
+    stroke-width: 14;
+    stroke-linecap: round;
+    transition: stroke-dashoffset 0.5s ease, stroke 0.4s ease;
+  }
+
+  .ring-text {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+  }
+
+  .ring-hours {
+    font-size: 2rem;
+    font-weight: 800;
+    color: #fff;
+    line-height: 1;
+  }
+
+  .ring-label {
+    font-size: 0.72rem;
+    color: #888;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    margin-top: 3px;
+  }
+
+  .ring-goal {
+    font-size: 0.85rem;
+    color: #aaa;
+    margin-top: 10px;
+  }
+
+  /* ── Status banner ── */
+  .status-banner {
+    border-radius: 10px;
+    padding: 10px 24px;
+    font-size: 0.95rem;
+    font-weight: 600;
+    margin-bottom: 24px;
+    text-align: center;
+    transition: background 0.4s, color 0.4s;
+  }
+
+  .status-banner.on-track { background: #14532d; color: #4ade80; }
+  .status-banner.behind   { background: #450a0a; color: #f87171; }
+  .status-banner.done     { background: #1e3a5f; color: #60a5fa; }
+
+  /* ── Day cards ── */
+  .cards {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 10px;
+    width: 100%;
+    max-width: 720px;
+    margin-bottom: 24px;
+  }
+
+  @media (max-width: 600px) {
+    .cards { grid-template-columns: 1fr 1fr; }
+    .cards .card:last-child { grid-column: 1 / -1; }
+  }
+
+  .card {
+    background: #1a1a22;
+    border: 1.5px solid #2e2e3e;
+    border-radius: 12px;
+    padding: 14px 12px;
+    text-align: center;
+    transition: border-color 0.3s;
+  }
+
+  .card.today { border-color: #4ade80; }
+  .card.completed { border-color: #334155; background: #141420; }
+  .card.completed .day-name { color: #6b7280; }
+
+  .day-name {
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: #9ca3af;
+    margin-bottom: 2px;
+  }
+
+  .day-date {
+    font-size: 0.7rem;
+    color: #555;
+    margin-bottom: 10px;
+  }
+
+  .target-label {
+    font-size: 0.65rem;
+    color: #555;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    margin-bottom: 2px;
+  }
+
+  .target-val {
+    font-size: 1.4rem;
+    font-weight: 800;
+    color: #c4b5fd;
+    line-height: 1.1;
+    margin-bottom: 10px;
+    transition: color 0.3s;
+  }
+
+  .card.completed .target-val { color: #475569; }
+
+  .actual-label {
+    font-size: 0.65rem;
+    color: #555;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    margin-bottom: 4px;
+  }
+
+  .actual-input {
+    width: 100%;
+    background: #0f0f13;
+    border: 1.5px solid #2e2e3e;
+    border-radius: 7px;
+    color: #fff;
+    font-size: 1.05rem;
+    font-weight: 700;
+    text-align: center;
+    padding: 6px 4px;
+    outline: none;
+    transition: border-color 0.2s;
+    -moz-appearance: textfield;
+  }
+
+  .actual-input::-webkit-outer-spin-button,
+  .actual-input::-webkit-inner-spin-button { -webkit-appearance: none; }
+
+  .actual-input:focus { border-color: #4ade80; }
+  .actual-input:disabled { color: #555; cursor: not-allowed; }
+
+  .diff-tag {
+    margin-top: 7px;
+    font-size: 0.72rem;
+    font-weight: 600;
+    border-radius: 5px;
+    padding: 2px 6px;
+    display: inline-block;
+    min-height: 18px;
+  }
+
+  .diff-tag.ahead  { background: #14532d; color: #4ade80; }
+  .diff-tag.behind { background: #450a0a; color: #f87171; }
+  .diff-tag.exact  { background: #1e3a5f; color: #60a5fa; }
+
+  /* ── Summary row ── */
+  .summary {
+    width: 100%;
+    max-width: 720px;
+    background: #1a1a22;
+    border: 1.5px solid #2e2e3e;
+    border-radius: 12px;
+    padding: 14px 20px;
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin-bottom: 20px;
+  }
+
+  .sum-item { text-align: center; }
+  .sum-val {
+    font-size: 1.5rem;
+    font-weight: 800;
+    color: #fff;
+    line-height: 1;
+  }
+  .sum-val.green  { color: #4ade80; }
+  .sum-val.red    { color: #f87171; }
+  .sum-val.purple { color: #c4b5fd; }
+  .sum-val.blue   { color: #60a5fa; }
+  .sum-lbl {
+    font-size: 0.68rem;
+    color: #555;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    margin-top: 3px;
+  }
+
+  .reset-btn {
+    background: none;
+    border: 1px solid #2e2e3e;
+    color: #555;
+    border-radius: 7px;
+    padding: 8px 20px;
+    font-size: 0.8rem;
+    cursor: pointer;
+    transition: border-color 0.2s, color 0.2s;
+    margin-top: 4px;
+  }
+  .reset-btn:hover { border-color: #f87171; color: #f87171; }
+</style>
+</head>
+<body>
+
+<h1>⏱ TIME CHECK 1.0</h1>
+<p class="subtitle">55-Hour Week Tracker • Enter actual hours when day is done</p>
+
+<div class="ring-wrap">
+  <div class="ring-container">
+    <svg width="180" height="180" viewBox="0 0 180 180">
+      <circle class="ring-bg" cx="90" cy="90" r="76"/>
+      <circle class="ring-fill" id="ringFill" cx="90" cy="90" r="76"
+              stroke-dasharray="477.5" stroke-dashoffset="477.5"/>
+    </svg>
+    <div class="ring-text">
+      <div class="ring-hours" id="ringHours">0.00</div>
+      <div class="ring-label">of 55 hrs</div>
+    </div>
+  </div>
+  <div class="ring-goal" id="ringGoal">Enter hours each day to track progress</div>
+</div>
+
+<div class="status-banner on-track" id="statusBanner">Calculating…</div>
+
+<div class="cards" id="cardsContainer"></div>
+
+<div class="summary">
+  <div class="sum-item">
+    <div class="sum-val green" id="sumWorked">0.00</div>
+    <div class="sum-lbl">Hrs Worked</div>
+  </div>
+  <div class="sum-item">
+    <div class="sum-val purple" id="sumTarget">55.00</div>
+    <div class="sum-lbl">Goal</div>
+  </div>
+  <div class="sum-item">
+    <div class="sum-val blue" id="sumRemaining">55.00</div>
+    <div class="sum-lbl">Hrs Left</div>
+  </div>
+  <div class="sum-item">
+    <div class="sum-val blue" id="sumPerDay">11.00</div>
+    <div class="sum-lbl">Needed/Day</div>
+  </div>
+</div>
+
+<button class="reset-btn" onclick="resetAll()">↺ Reset Week</button>
+
+<script>
+  const GOAL = 55;
+  const DAYS = ['Monday','Tuesday','Wednesday','Thursday','Friday'];
+  const DATES = ['Jul 21','Jul 22','Jul 23','Jul 24','Jul 25']; // week of Mon Jul 21 2026
+
+  // Detect today's day index (0=Mon ... 4=Fri)
+  const todayJS = new Date().getDay(); // 0=Sun,1=Mon...5=Fri,6=Sat
+  const todayIdx = (todayJS >= 1 && todayJS <= 5) ? todayJS - 1 : -1;
+
+  // State: actual hours per day (null = not entered)
+  let actuals = [null, null, null, null, null];
+
+  // Load from localStorage
+  function load() {
+    const saved = localStorage.getItem('timecheck_actuals');
+    if (saved) {
+      try { actuals = JSON.parse(saved); } catch(e) {}
+    }
+  }
+
+  function save() {
+    localStorage.setItem('timecheck_actuals', JSON.stringify(actuals));
+  }
+
+  function calcTargets() {
+    // Which days have been entered?
+    let workedSoFar = 0;
+    let completedDays = 0;
+
+    for (let i = 0; i < 5; i++) {
+      if (actuals[i] !== null) {
+        workedSoFar += actuals[i];
+        completedDays++;
+      }
+    }
+
+    const remainingHours = Math.max(0, GOAL - workedSoFar);
+    const remainingDays  = 5 - completedDays;
+    const perDay = remainingDays > 0 ? remainingHours / remainingDays : 0;
+
+    return { workedSoFar, remainingHours, remainingDays, perDay };
+  }
+
+  function render() {
+    const { workedSoFar, remainingHours, remainingDays, perDay } = calcTargets();
+
+    // Ring
+    const pct = Math.min(workedSoFar / GOAL, 1);
+    const circ = 477.5;
+    const offset = circ - pct * circ;
+    const ring = document.getElementById('ringFill');
+    ring.style.strokeDashoffset = offset;
+    ring.style.stroke = workedSoFar >= GOAL ? '#60a5fa' : (pct < 0.6 ? '#f87171' : '#4ade80');
+    document.getElementById('ringHours').textContent = workedSoFar.toFixed(2);
+    document.getElementById('ringGoal').textContent =
+      workedSoFar >= GOAL
+        ? '🎉 Goal reached!'
+        : `${remainingHours.toFixed(2)} hrs remaining over ${remainingDays} day${remainingDays !== 1 ? 's' : ''}`;
+
+    // Status banner
+    const banner = document.getElementById('statusBanner');
+    if (workedSoFar >= GOAL) {
+      banner.textContent = '🎉 You hit 55 hours — WEEK COMPLETE!';
+      banner.className = 'status-banner done';
+    } else {
+      const completedDays = actuals.filter(a => a !== null).length;
+      if (completedDays === 0) {
+        banner.textContent = `Default target: 11.00 hrs/day to reach 55`;
+        banner.className = 'status-banner on-track';
+      } else {
+        const diff = workedSoFar - (completedDays * (GOAL / 5));
+        if (diff >= 0) {
+          banner.textContent = `✅ ON TRACK — ahead by ${diff.toFixed(2)} hrs`;
+          banner.className = 'status-banner on-track';
+        } else {
+          banner.textContent = `⚠️ BEHIND by ${Math.abs(diff).toFixed(2)} hrs — need ${perDay.toFixed(2)} hrs/day remaining`;
+          banner.className = 'status-banner behind';
+        }
+      }
+    }
+
+    // Summary
+    document.getElementById('sumWorked').textContent    = workedSoFar.toFixed(2);
+    document.getElementById('sumRemaining').textContent = remainingHours.toFixed(2);
+    document.getElementById('sumPerDay').textContent    = remainingDays > 0 ? perDay.toFixed(2) : '—';
+
+    // Cards
+    const container = document.getElementById('cardsContainer');
+    container.innerHTML = '';
+
+    for (let i = 0; i < 5; i++) {
+      const isCompleted = actuals[i] !== null;
+      const isToday     = i === todayIdx;
+
+      // Target for this day
+      let displayTarget;
+      if (isCompleted) {
+        displayTarget = actuals[i].toFixed(2);
+      } else {
+        displayTarget = perDay > 0 ? perDay.toFixed(2) : (GOAL / 5).toFixed(2);
+      }
+
+      // Diff tag for completed days
+      let diffHTML = '';
+      if (isCompleted) {
+        const dayTarget = GOAL / 5; // baseline target was 11
+        const diff = actuals[i] - dayTarget;
+        if (Math.abs(diff) < 0.01) {
+          diffHTML = `<div class="diff-tag exact">Exact</div>`;
+        } else if (diff > 0) {
+          diffHTML = `<div class="diff-tag ahead">+${diff.toFixed(2)} ahead</div>`;
+        } else {
+          diffHTML = `<div class="diff-tag behind">${diff.toFixed(2)} short</div>`;
+        }
+      }
+
+      const card = document.createElement('div');
+      card.className = `card${isToday ? ' today' : ''}${isCompleted ? ' completed' : ''}`;
+      card.innerHTML = `
+        <div class="day-name">${DAYS[i]}</div>
+        <div class="day-date">${DATES[i]}</div>
+        <div class="target-label">${isCompleted ? 'Actual' : 'Target'}</div>
+        <div class="target-val" id="target-${i}">${displayTarget}</div>
+        <div class="actual-label">Enter Actual</div>
+        <input
+          class="actual-input"
+          id="input-${i}"
+          type="number"
+          step="0.01"
+          min="0"
+          max="24"
+          placeholder="${displayTarget}"
+          value="${isCompleted ? actuals[i].toFixed(2) : ''}"
+          onchange="handleInput(${i}, this.value)"
+          onfocus="this.select()"
+        />
+        ${diffHTML}
+      `;
+      container.appendChild(card);
+    }
+  }
+
+  function handleInput(idx, val) {
+    const parsed = parseFloat(val);
+    if (val === '' || isNaN(parsed)) {
+      actuals[idx] = null;
+    } else {
+      actuals[idx] = Math.max(0, parsed);
+    }
+    save();
+    render();
+  }
+
+  function resetAll() {
+    if (!confirm('Reset all entries for this week?')) return;
+    actuals = [null, null, null, null, null];
+    save();
+    render();
+  }
+
+  load();
+  render();
+</script>
+</body>
+</html>

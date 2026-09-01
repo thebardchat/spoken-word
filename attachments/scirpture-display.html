@@ -1,0 +1,430 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>The Word of God</title>
+  <link rel="preconnect" href="https://cdn.jsdelivr.net">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fontsource/eb-garamond@5/400.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fontsource/eb-garamond@5/400-italic.css">
+  <style>
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html, body {
+      width: 100%;
+      height: 100%;
+      background: #0c0905;
+      overflow: hidden;
+    }
+
+    body {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      user-select: none;
+    }
+
+    /* ── Cross watermark ── */
+    .cross {
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -52%);
+      opacity: 0.04;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    /* ── Top label ── */
+    .top-label {
+      position: fixed;
+      top: 1.6rem;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      z-index: 3;
+      pointer-events: none;
+    }
+    .top-label .line {
+      width: 32px;
+      height: 0.5px;
+      background: #c8a96e;
+      opacity: 0.22;
+    }
+    .top-label span {
+      font-size: 0.58rem;
+      letter-spacing: 0.34em;
+      text-transform: uppercase;
+      color: #c8a96e;
+      opacity: 0.3;
+      font-family: system-ui, -apple-system, sans-serif;
+      white-space: nowrap;
+    }
+
+    /* ── Verse container ── */
+    #vc {
+      text-align: center;
+      max-width: 680px;
+      width: 90%;
+      padding: 0 2rem;
+      opacity: 0;
+      transition: opacity 2.5s ease-in-out;
+      position: relative;
+      z-index: 2;
+    }
+
+    .divider {
+      width: 36px;
+      height: 0.5px;
+      background: #c8a96e;
+      margin: 0 auto;
+      opacity: 0.38;
+    }
+
+    #vt {
+      font-family: 'EB Garamond', 'Palatino Linotype', 'Book Antiqua', Georgia, serif;
+      font-size: clamp(1.2rem, 2.4vw, 1.85rem);
+      line-height: 1.95;
+      color: #f0e8d8;
+      letter-spacing: 0.02em;
+      margin: 2rem 0;
+      font-style: italic;
+      font-weight: 400;
+    }
+
+    #vr {
+      font-family: system-ui, -apple-system, sans-serif;
+      font-size: 0.68rem;
+      letter-spacing: 0.26em;
+      text-transform: uppercase;
+      color: #c8a96e;
+      opacity: 0.65;
+      font-weight: 400;
+    }
+
+    /* ── Progress bar ── */
+    #pb {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      height: 1px;
+      background: #c8a96e;
+      opacity: 0.14;
+      width: 0%;
+    }
+
+    /* ── Dots ── */
+    #dots {
+      position: fixed;
+      bottom: 1.4rem;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      gap: 5px;
+      align-items: center;
+      z-index: 3;
+      pointer-events: none;
+      flex-wrap: wrap;
+      justify-content: center;
+      max-width: 300px;
+    }
+    .dot {
+      width: 3px;
+      height: 3px;
+      border-radius: 50%;
+      background: #c8a96e;
+      opacity: 0.15;
+      transition: opacity 0.8s, transform 0.5s;
+      flex-shrink: 0;
+    }
+    .dot.on {
+      opacity: 0.75;
+      transform: scale(1.6);
+    }
+
+    /* ── Controls ── */
+    .controls {
+      position: fixed;
+      top: 1rem;
+      right: 1rem;
+      display: flex;
+      gap: 6px;
+      z-index: 10;
+    }
+    .ctrl-btn {
+      background: transparent;
+      border: 0.5px solid rgba(200, 169, 110, 0.2);
+      color: rgba(200, 169, 110, 0.45);
+      padding: 5px 10px;
+      border-radius: 6px;
+      cursor: pointer;
+      font-family: system-ui, -apple-system, sans-serif;
+      font-size: 0.6rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      opacity: 0.35;
+      transition: opacity 0.3s, border-color 0.3s;
+    }
+    .ctrl-btn:hover {
+      opacity: 1;
+      border-color: rgba(200, 169, 110, 0.5);
+    }
+
+    /* ── Pause indicator ── */
+    #pind {
+      position: fixed;
+      bottom: 3.5rem;
+      left: 50%;
+      transform: translateX(-50%);
+      color: rgba(200, 169, 110, 0.45);
+      font-size: 0.6rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      font-family: system-ui, -apple-system, sans-serif;
+      opacity: 0;
+      transition: opacity 0.4s;
+      pointer-events: none;
+      white-space: nowrap;
+    }
+
+    /* ── Verse counter ── */
+    #vcnt {
+      position: fixed;
+      bottom: 1.35rem;
+      right: 1.2rem;
+      font-family: system-ui, -apple-system, sans-serif;
+      font-size: 0.58rem;
+      letter-spacing: 0.18em;
+      color: #c8a96e;
+      opacity: 0.22;
+      pointer-events: none;
+    }
+
+    /* ── Keyboard hint ── */
+    #hint {
+      position: fixed;
+      bottom: 1.35rem;
+      left: 1.2rem;
+      font-family: system-ui, -apple-system, sans-serif;
+      font-size: 0.55rem;
+      letter-spacing: 0.14em;
+      color: #c8a96e;
+      opacity: 0.18;
+      pointer-events: none;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Cross watermark -->
+  <svg class="cross" width="120" height="170" viewBox="0 0 120 170" aria-hidden="true">
+    <rect x="52" y="8" width="16" height="154" fill="#c8a96e"/>
+    <rect x="16" y="52" width="88" height="16" fill="#c8a96e"/>
+  </svg>
+
+  <!-- Top label -->
+  <div class="top-label">
+    <div class="line"></div>
+    <span>The Word of God</span>
+    <div class="line"></div>
+  </div>
+
+  <!-- Verse -->
+  <div id="vc">
+    <div class="divider"></div>
+    <p id="vt"></p>
+    <p id="vr"></p>
+    <div class="divider"></div>
+  </div>
+
+  <!-- Progress bar -->
+  <div id="pb"></div>
+
+  <!-- Dots -->
+  <div id="dots"></div>
+
+  <!-- Controls -->
+  <div class="controls">
+    <button class="ctrl-btn" id="prev-btn" onclick="prevVerse(event)" title="Previous verse (← arrow)">&#8592; Prev</button>
+    <button class="ctrl-btn" id="pause-btn" onclick="togglePause(event)" title="Pause / Resume (Space)">Pause</button>
+    <button class="ctrl-btn" onclick="goFS(event)" title="Fullscreen (F)">Fullscreen</button>
+  </div>
+
+  <!-- Pause indicator -->
+  <div id="pind">&#9646;&#9646; Paused &mdash; click or press Space to resume</div>
+
+  <!-- Verse counter -->
+  <div id="vcnt"></div>
+
+  <!-- Keyboard hint -->
+  <div id="hint">Space &nbsp;&#183;&nbsp; &#8592; &#8594; &nbsp;&#183;&nbsp; F</div>
+
+  <script>
+    const VERSES = [
+      { t: "For God so loved the world that he gave his one and only Son, that whoever believes in him shall not perish but have eternal life.", r: "John 3:16" },
+      { t: "I am the way and the truth and the life. No one comes to the Father except through me.", r: "John 14:6" },
+      { t: "Come to me, all you who are weary and burdened, and I will give you rest.", r: "Matthew 11:28" },
+      { t: "Peace I leave with you; my peace I give you. Do not let your hearts be troubled and do not be afraid.", r: "John 14:27" },
+      { t: "I am the light of the world. Whoever follows me will never walk in darkness, but will have the light of life.", r: "John 8:12" },
+      { t: "I am the resurrection and the life. The one who believes in me will live, even though they die.", r: "John 11:25" },
+      { t: "I have come that they may have life, and have it to the full.", r: "John 10:10" },
+      { t: "Be still, and know that I am God.", r: "Psalm 46:10" },
+      { t: "The Lord is my shepherd; I shall not want.", r: "Psalm 23:1" },
+      { t: "I can do all things through Christ who strengthens me.", r: "Philippians 4:13" },
+      { t: "Do not be anxious about anything, but in every situation, by prayer and petition, with thanksgiving, present your requests to God.", r: "Philippians 4:6" },
+      { t: "For I know the plans I have for you, declares the Lord — plans to prosper you and not to harm you, plans to give you hope and a future.", r: "Jeremiah 29:11" },
+      { t: "Trust in the Lord with all your heart and lean not on your own understanding; in all your ways submit to him, and he will make your paths straight.", r: "Proverbs 3:5–6" },
+      { t: "Greater love has no one than this: to lay down one's life for one's friends.", r: "John 15:13" },
+      { t: "The Lord bless you and keep you; the Lord make his face shine on you and be gracious to you; the Lord turn his face toward you and give you peace.", r: "Numbers 6:24–26" },
+      { t: "The Lord is my strength and my shield; my heart trusts in him, and he helps me.", r: "Psalm 28:7" },
+      { t: "He heals the brokenhearted and binds up their wounds.", r: "Psalm 147:3" },
+      { t: "Even though I walk through the darkest valley, I will fear no evil, for you are with me; your rod and your staff, they comfort me.", r: "Psalm 23:4" },
+      { t: "Cast all your anxiety on him because he cares for you.", r: "1 Peter 5:7" },
+      { t: "The name of the Lord is a fortified tower; the righteous run to it and are safe.", r: "Proverbs 18:10" },
+      { t: "He gives strength to the weary and increases the power of the weak.", r: "Isaiah 40:29" },
+      { t: "Those who hope in the Lord will renew their strength. They will soar on wings like eagles; they will run and not grow weary, they will walk and not be faint.", r: "Isaiah 40:31" },
+      { t: "If God is for us, who can be against us?", r: "Romans 8:31" },
+      { t: "Neither death nor life, neither angels nor demons, neither the present nor the future, nor any powers, neither height nor depth — nothing in all creation will be able to separate us from the love of God.", r: "Romans 8:38–39" },
+      { t: "My grace is sufficient for you, for my power is made perfect in weakness.", r: "2 Corinthians 12:9" },
+      { t: "And we know that in all things God works for the good of those who love him.", r: "Romans 8:28" },
+      { t: "The Lord your God is with you, the Mighty Warrior who saves. He will take great delight in you; in his love he will rejoice over you with singing.", r: "Zephaniah 3:17" },
+      { t: "Ask and it will be given to you; seek and you will find; knock and the door will be opened to you.", r: "Matthew 7:7" },
+      { t: "I am with you always, to the very end of the age.", r: "Matthew 28:20" },
+      { t: "Blessed are the pure in heart, for they will see God.", r: "Matthew 5:8" },
+    ];
+
+    const vcEl  = document.getElementById('vc');
+    const vtEl  = document.getElementById('vt');
+    const vrEl  = document.getElementById('vr');
+    const dotsEl= document.getElementById('dots');
+    const pbEl  = document.getElementById('pb');
+    const pindEl= document.getElementById('pind');
+    const vcntEl= document.getElementById('vcnt');
+    const pbtnEl= document.getElementById('pause-btn');
+
+    const FADE = 2500;
+    const HOLD = 10000;
+
+    let cur = 0;
+    let timers = [];
+    let paused = false;
+
+    // Build dots
+    VERSES.forEach((_, i) => {
+      const d = document.createElement('div');
+      d.className = 'dot';
+      dotsEl.appendChild(d);
+    });
+
+    function clearTimers() {
+      timers.forEach(clearTimeout);
+      timers = [];
+    }
+
+    function setDots(i) {
+      Array.from(dotsEl.children).forEach((d, j) => {
+        d.className = 'dot' + (j === i ? ' on' : '');
+      });
+    }
+
+    function startPB(ms) {
+      pbEl.style.transition = 'none';
+      pbEl.style.width = '0%';
+      requestAnimationFrame(() => requestAnimationFrame(() => {
+        pbEl.style.transition = `width ${ms}ms linear`;
+        pbEl.style.width = '100%';
+      }));
+    }
+
+    function show(i) {
+      clearTimers();
+      vtEl.textContent = VERSES[i].t;
+      vrEl.textContent = VERSES[i].r;
+      vcntEl.textContent = (i + 1) + ' / ' + VERSES.length;
+      setDots(i);
+      startPB(HOLD + FADE);
+      vcEl.style.opacity = '1';
+      timers.push(setTimeout(() => {
+        vcEl.style.opacity = '0';
+        timers.push(setTimeout(() => {
+          cur = (i + 1) % VERSES.length;
+          show(cur);
+        }, FADE + 120));
+      }, HOLD));
+    }
+
+    function togglePause(e) {
+      if (e) e.stopPropagation();
+      paused = !paused;
+      if (paused) {
+        clearTimers();
+        pbEl.style.transition = 'none';
+        pindEl.style.opacity = '1';
+        pbtnEl.textContent = 'Resume';
+      } else {
+        pindEl.style.opacity = '0';
+        pbtnEl.textContent = 'Pause';
+        show(cur);
+      }
+    }
+
+    function prevVerse(e) {
+      if (e) e.stopPropagation();
+      clearTimers();
+      paused = false;
+      pindEl.style.opacity = '0';
+      pbtnEl.textContent = 'Pause';
+      vcEl.style.opacity = '0';
+      setTimeout(() => {
+        cur = (cur - 1 + VERSES.length) % VERSES.length;
+        show(cur);
+      }, 400);
+    }
+
+    function nextVerse() {
+      clearTimers();
+      paused = false;
+      pindEl.style.opacity = '0';
+      pbtnEl.textContent = 'Pause';
+      vcEl.style.opacity = '0';
+      setTimeout(() => {
+        cur = (cur + 1) % VERSES.length;
+        show(cur);
+      }, 400);
+    }
+
+    function goFS(e) {
+      if (e) e.stopPropagation();
+      if (document.fullscreenElement) {
+        document.exitFullscreen();
+      } else {
+        document.documentElement.requestFullscreen && document.documentElement.requestFullscreen();
+      }
+    }
+
+    // Click body to pause (not buttons)
+    document.body.addEventListener('click', e => {
+      if (e.target.closest('.ctrl-btn')) return;
+      togglePause(null);
+    });
+
+    // Keyboard shortcuts
+    document.addEventListener('keydown', e => {
+      if (e.key === ' ' || e.key === 'Spacebar') { e.preventDefault(); togglePause(null); }
+      if (e.key === 'ArrowRight') nextVerse();
+      if (e.key === 'ArrowLeft')  prevVerse(null);
+      if (e.key === 'f' || e.key === 'F') goFS(null);
+    });
+
+    // Start
+    setTimeout(() => show(0), 600);
+  </script>
+</body>
+</html>

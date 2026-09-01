@@ -1,0 +1,36 @@
+{
+  "url": "http://127.0.0.1:8080/",
+  "viewports": {
+    "desktop": {
+      "width": 1280,
+      "height": 800,
+      "status": 200,
+      "title": "The Word of God",
+      "hasCanvas": false,
+      "bodyTextLen": 828,
+      "bodyTextHash": "093a4bfe4e8e9f4d04ef3aea5dd90f8a03612121808bae3fe774d35763600c19",
+      "bodyTextPrefix": "THE WORD OF GOD Hear the Word. Keep the hours. A sweet voice rea",
+      "horizontalOverflow": false,
+      "consoleErrors": [],
+      "pageErrors": [],
+      "screenshot": "/workspace/screenshots/app-builder-preview.png"
+    },
+    "mobile": {
+      "width": 390,
+      "height": 844,
+      "status": 200,
+      "title": "The Word of God",
+      "hasCanvas": false,
+      "bodyTextLen": 828,
+      "bodyTextHash": "3ae5a59dba3dca6427b9c08928c2d32613519e1d5f52f587892a4a2331fe99a5",
+      "bodyTextPrefix": "THE WORD OF GOD Hear the Word. Keep the hours. A sweet voice rea",
+      "horizontalOverflow": false,
+      "consoleErrors": [],
+      "pageErrors": [],
+      "screenshot": "/workspace/screenshots/app-builder-preview-mobile.png"
+    }
+  },
+  "brandWarnings": [],
+  "authWarnings": [],
+  "verdictFile": "/workspace/screenshots/app-builder-preview.json"
+}

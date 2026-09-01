@@ -1,0 +1,467 @@
+#!/usr/bin/env python3
+"""Generate TypeScript verse treasuries from the user's collection + catalog."""
+from __future__ import annotations
+
+import json
+import re
+from pathlib import Path
+
+ROOT = Path("/workspace")
+OUT = ROOT / "src" / "data"
+
+FROM_GOD = {
+    "John 14:6",
+    "Matthew 11:28",
+    "John 14:27",
+    "John 8:12",
+    "John 11:25",
+    "John 10:10",
+    "Matthew 28:20",
+    "John 15:13",
+    "Matthew 7:7",
+    "John 16:33",
+    "Matthew 6:34",
+    "Isaiah 41:10",
+    "2 Corinthians 12:9",
+    "Jeremiah 29:11",
+    "Matthew 6:33",
+    "Psalm 46:10",
+}
+
+AUDIO = {
+    "John 14:6": "/audio/god/john-14-6.mp3",
+    "Matthew 11:28": "/audio/god/matthew-11-28.mp3",
+    "John 14:27": "/audio/god/john-14-27.mp3",
+    "John 8:12": "/audio/god/john-8-12.mp3",
+    "John 11:25": "/audio/god/john-11-25.mp3",
+    "John 10:10": "/audio/god/john-10-10.mp3",
+    "Matthew 28:20": "/audio/god/matthew-28-20.mp3",
+    "John 16:33": "/audio/god/john-16-33.mp3",
+    "Isaiah 41:10": "/audio/god/isaiah-41-10.mp3",
+    "2 Corinthians 12:9": "/audio/god/2cor-12-9.mp3",
+    "Jeremiah 29:11": "/audio/god/jeremiah-29-11.mp3",
+    "Psalm 46:10": "/audio/god/psalm-46-10.mp3",
+    "John 6:35": "/audio/god/john-6-35.mp3",
+    "Mark 1:11": "/audio/god/mark-1-11.mp3",
+    "Luke 23:34": "/audio/god/luke-23-34.mp3",
+    "Acts 1:8": "/audio/god/acts-1-8.mp3",
+    "Revelation 3:20": "/audio/god/revelation-3-20.mp3",
+    "John 8:58": "/audio/god/john-8-58.mp3",
+    "Genesis 1:3": "/audio/god/genesis-1-3.mp3",
+    "Exodus 3:14": "/audio/god/exodus-3-14.mp3",
+    "John 10:11": "/audio/god/john-10-11.mp3",
+    "John 15:5": "/audio/god/john-15-5.mp3",
+    "Revelation 22:13": "/audio/god/revelation-22-13.mp3",
+    "Mark 4:39": "/audio/god/mark-4-39.mp3",
+    "Matthew 3:17": "/audio/god/matthew-3-17.mp3",
+    "John 11:43": "/audio/god/john-11-43.mp3",
+    "Matthew 28:18": "/audio/god/matthew-28-18.mp3",
+    "Revelation 21:5": "/audio/god/revelation-21-5.mp3",
+}
+
+
+def slug(ref: str, idx: int) -> str:
+    s = re.sub(r"[^a-z0-9]+", "-", ref.lower()).strip("-")
+    return f"{s}-{idx}"
+
+
+def ts_str(s: str) -> str:
+    return json.dumps(s, ensure_ascii=False)
+
+
+def emit_verse(v: dict, indent: str = "  ") -> str:
+    parts = [
+        f"id: {ts_str(v['id'])}",
+        f"t: {ts_str(v['t'])}",
+        f"r: {ts_str(v['r'])}",
+    ]
+    if v.get("q"):
+        parts.append("q: true")
+    if v.get("fromGod"):
+        parts.append("fromGod: true")
+    if v.get("audio"):
+        parts.append(f"audio: {ts_str(v['audio'])}")
+    if v.get("fresh"):
+        parts.append("fresh: true")
+    return indent + "{ " + ", ".join(parts) + " }"
+
+
+def load_builtin() -> list[dict]:
+    raw = json.loads(Path("/tmp/builtin.json").read_text())
+    out = []
+    for i, v in enumerate(raw):
+        ref = v["r"]
+        item = {
+            "id": slug(ref, i),
+            "t": v["t"],
+            "r": ref,
+            "q": bool(v.get("q")),
+            "fromGod": (not v.get("q")) and ref in FROM_GOD,
+        }
+        if item["fromGod"] and ref in AUDIO:
+            item["audio"] = AUDIO[ref]
+        out.append(item)
+    return out
+
+
+TODAY = [
+    {
+        "t": "In the beginning was the Word, and the Word was with God, and the Word was God.",
+        "r": "John 1:1",
+    },
+    {
+        "t": "The Word became flesh and made his dwelling among us. We have seen his glory, the glory of the one and only Son, who came from the Father, full of grace and truth.",
+        "r": "John 1:14",
+    },
+    {
+        "t": "Today in the town of David a Savior has been born to you; he is the Messiah, the Lord.",
+        "r": "Luke 2:11",
+    },
+    {
+        "t": "And a voice came from heaven: You are my Son, whom I love; with you I am well pleased.",
+        "r": "Mark 1:11",
+        "fromGod": True,
+    },
+    {
+        "t": "I am the bread of life. Whoever comes to me will never go hungry, and whoever believes in me will never be thirsty.",
+        "r": "John 6:35",
+        "fromGod": True,
+    },
+    {
+        "t": "Father, forgive them, for they do not know what they are doing.",
+        "r": "Luke 23:34",
+        "fromGod": True,
+    },
+    {
+        "t": "He is not here; he has risen! Remember how he told you, while he was still with you in Galilee.",
+        "r": "Luke 24:6",
+    },
+    {
+        "t": "You will receive power when the Holy Spirit comes on you; and you will be my witnesses in Jerusalem, and in all Judea and Samaria, and to the ends of the earth.",
+        "r": "Acts 1:8",
+        "fromGod": True,
+    },
+    {
+        "t": "If you declare with your mouth, Jesus is Lord, and believe in your heart that God raised him from the dead, you will be saved.",
+        "r": "Romans 10:9",
+    },
+    {
+        "t": "Here I am! I stand at the door and knock. If anyone hears my voice and opens the door, I will come in and eat with that person, and they with me.",
+        "r": "Revelation 3:20",
+        "fromGod": True,
+    },
+]
+
+
+def with_meta(rows: list[dict], start_idx: int, fresh: bool = False) -> list[dict]:
+    out = []
+    for i, v in enumerate(rows):
+        ref = v["r"]
+        item = {
+            "id": slug(ref, start_idx + i),
+            "t": v["t"],
+            "r": ref,
+            "q": bool(v.get("q")),
+            "fromGod": bool(v.get("fromGod") or ref in FROM_GOD),
+        }
+        if item["fromGod"] and ref in AUDIO:
+            item["audio"] = AUDIO[ref]
+        if fresh:
+            item["fresh"] = True
+        out.append(item)
+    return out
+
+
+# Nightly unlock treasury — ten verses a night, ordered as a path through the
+# life of Jesus first (for a first-time reader), then the rest of Scripture.
+CATALOG: list[dict] = [
+    # Night 1 — Birth
+    {"t": "The virgin will conceive and give birth to a son, and they will call him Immanuel — which means God with us.", "r": "Matthew 1:23"},
+    {"t": "She will give birth to a son, and you are to give him the name Jesus, because he will save his people from their sins.", "r": "Matthew 1:21"},
+    {"t": "For to us a child is born, to us a son is given, and the government will be on his shoulders. And he will be called Wonderful Counselor, Mighty God, Everlasting Father, Prince of Peace.", "r": "Isaiah 9:6"},
+    {"t": "But you, Bethlehem Ephrathah, though you are small among the clans of Judah, out of you will come for me one who will be ruler over Israel, whose origins are from of old, from ancient times.", "r": "Micah 5:2"},
+    {"t": "And there were shepherds living out in the fields nearby, keeping watch over their flocks at night. An angel of the Lord appeared to them, and the glory of the Lord shone around them.", "r": "Luke 2:8–9"},
+    {"t": "Glory to God in the highest heaven, and on earth peace to those on whom his favor rests.", "r": "Luke 2:14"},
+    {"t": "Mary treasured up all these things and pondered them in her heart.", "r": "Luke 2:19"},
+    {"t": "The Word became flesh and made his dwelling among us.", "r": "John 1:14a"},
+    {"t": "He came to that which was his own, but his own did not receive him. Yet to all who did receive him, to those who believed in his name, he gave the right to become children of God.", "r": "John 1:11–12"},
+    {"t": "The light shines in the darkness, and the darkness has not overcome it.", "r": "John 1:5"},
+    # Night 2 — Baptism and calling
+    {"t": "This is my Son, whom I love; with him I am well pleased.", "r": "Matthew 3:17", "fromGod": True},
+    {"t": "The next day John saw Jesus coming toward him and said, Look, the Lamb of God, who takes away the sin of the world!", "r": "John 1:29"},
+    {"t": "Come, follow me, and I will send you out to fish for people.", "r": "Matthew 4:19", "fromGod": True},
+    {"t": "Jesus went into Galilee, proclaiming the good news of God. The time has come, he said. The kingdom of God has come near. Repent and believe the good news!", "r": "Mark 1:14–15", "fromGod": True},
+    {"t": "Jesus answered, It is written: Man shall not live on bread alone, but on every word that comes from the mouth of God.", "r": "Matthew 4:4", "fromGod": True},
+    {"t": "From that time on Jesus began to preach, Repent, for the kingdom of heaven has come near.", "r": "Matthew 4:17", "fromGod": True},
+    {"t": "Come and you will see.", "r": "John 1:39", "fromGod": True},
+    {"t": "Andrew first found his brother Simon and said, We have found the Messiah.", "r": "John 1:41"},
+    {"t": "You are Simon son of John. You will be called Cephas — which, when translated, is Peter.", "r": "John 1:42", "fromGod": True},
+    {"t": "And Jesus grew in wisdom and stature, and in favor with God and man.", "r": "Luke 2:52"},
+    # Night 3 — Beatitudes
+    {"t": "Blessed are the poor in spirit, for theirs is the kingdom of heaven.", "r": "Matthew 5:3", "fromGod": True},
+    {"t": "Blessed are those who mourn, for they will be comforted.", "r": "Matthew 5:4", "fromGod": True},
+    {"t": "Blessed are the meek, for they will inherit the earth.", "r": "Matthew 5:5", "fromGod": True},
+    {"t": "Blessed are those who hunger and thirst for righteousness, for they will be filled.", "r": "Matthew 5:6", "fromGod": True},
+    {"t": "Blessed are the merciful, for they will be shown mercy.", "r": "Matthew 5:7", "fromGod": True},
+    {"t": "Blessed are the peacemakers, for they will be called children of God.", "r": "Matthew 5:9", "fromGod": True},
+    {"t": "Blessed are those who are persecuted because of righteousness, for theirs is the kingdom of heaven.", "r": "Matthew 5:10", "fromGod": True},
+    {"t": "You are the light of the world. A town built on a hill cannot be hidden.", "r": "Matthew 5:14", "fromGod": True},
+    {"t": "Let your light shine before others, that they may see your good deeds and glorify your Father in heaven.", "r": "Matthew 5:16", "fromGod": True},
+    {"t": "Love your enemies and pray for those who persecute you.", "r": "Matthew 5:44", "fromGod": True},
+    # Night 4 — Sermon on the Mount
+    {"t": "Our Father in heaven, hallowed be your name, your kingdom come, your will be done, on earth as it is in heaven.", "r": "Matthew 6:9–10", "fromGod": True},
+    {"t": "Give us today our daily bread. And forgive us our debts, as we also have forgiven our debtors.", "r": "Matthew 6:11–12", "fromGod": True},
+    {"t": "And lead us not into temptation, but deliver us from the evil one.", "r": "Matthew 6:13", "fromGod": True},
+    {"t": "For where your treasure is, there your heart will be also.", "r": "Matthew 6:21", "fromGod": True},
+    {"t": "No one can serve two masters. You cannot serve both God and money.", "r": "Matthew 6:24", "fromGod": True},
+    {"t": "Look at the birds of the air; they do not sow or reap or store away in barns, and yet your heavenly Father feeds them. Are you not much more valuable than they?", "r": "Matthew 6:26", "fromGod": True},
+    {"t": "So in everything, do to others what you would have them do to you, for this sums up the Law and the Prophets.", "r": "Matthew 7:12", "fromGod": True},
+    {"t": "Enter through the narrow gate. For wide is the gate and broad is the road that leads to destruction, and many enter through it.", "r": "Matthew 7:13", "fromGod": True},
+    {"t": "But small is the gate and narrow the road that leads to life, and only a few find it.", "r": "Matthew 7:14", "fromGod": True},
+    {"t": "Therefore everyone who hears these words of mine and puts them into practice is like a wise man who built his house on the rock.", "r": "Matthew 7:24", "fromGod": True},
+    # Night 5 — I AM
+    {"t": "Truly I tell you, before Abraham was born, I am.", "r": "John 8:58", "fromGod": True},
+    {"t": "I am the good shepherd. The good shepherd lays down his life for the sheep.", "r": "John 10:11", "fromGod": True},
+    {"t": "I am the vine; you are the branches. If you remain in me and I in you, you will bear much fruit; apart from me you can do nothing.", "r": "John 15:5", "fromGod": True},
+    {"t": "I am the gate; whoever enters through me will be saved. They will come in and go out, and find pasture.", "r": "John 10:9", "fromGod": True},
+    {"t": "I am the true vine, and my Father is the gardener.", "r": "John 15:1", "fromGod": True},
+    {"t": "I and the Father are one.", "r": "John 10:30", "fromGod": True},
+    {"t": "Anyone who has seen me has seen the Father.", "r": "John 14:9", "fromGod": True},
+    {"t": "I am the Alpha and the Omega, the First and the Last, the Beginning and the End.", "r": "Revelation 22:13", "fromGod": True},
+    {"t": "I am making everything new.", "r": "Revelation 21:5", "fromGod": True},
+    {"t": "Do not let your hearts be troubled. You believe in God; believe also in me.", "r": "John 14:1", "fromGod": True},
+    # Night 6 — Parables of mercy
+    {"t": "Suppose one of you has a hundred sheep and loses one of them. Does he not leave the ninety-nine in the open country and go after the lost sheep until he finds it?", "r": "Luke 15:4", "fromGod": True},
+    {"t": "I tell you that in the same way there will be more rejoicing in heaven over one sinner who repents than over ninety-nine righteous persons who do not need to repent.", "r": "Luke 15:7", "fromGod": True},
+    {"t": "But while he was still a long way off, his father saw him and was filled with compassion for him; he ran to his son, threw his arms around him and kissed him.", "r": "Luke 15:20"},
+    {"t": "For this son of mine was dead and is alive again; he was lost and is found.", "r": "Luke 15:24", "fromGod": True},
+    {"t": "The kingdom of heaven is like treasure hidden in a field. When a man found it, he hid it again, and then in his joy went and sold all he had and bought that field.", "r": "Matthew 13:44", "fromGod": True},
+    {"t": "A man was going down from Jerusalem to Jericho, when he was attacked by robbers. But a Samaritan, as he traveled, came where the man was; and when he saw him, he took pity on him.", "r": "Luke 10:30, 33", "fromGod": True},
+    {"t": "Go and do likewise.", "r": "Luke 10:37", "fromGod": True},
+    {"t": "Which of you, if your son asks for bread, will give him a stone? If you, then, though you are evil, know how to give good gifts to your children, how much more will your Father in heaven give good gifts to those who ask him!", "r": "Matthew 7:9, 11", "fromGod": True},
+    {"t": "Come, you who are blessed by my Father; take your inheritance, the kingdom prepared for you since the creation of the world.", "r": "Matthew 25:34", "fromGod": True},
+    {"t": "Truly I tell you, whatever you did for one of the least of these brothers and sisters of mine, you did for me.", "r": "Matthew 25:40", "fromGod": True},
+    # Night 7 — Miracles
+    {"t": "He got up, rebuked the wind and said to the waves, Peace! Be still! Then the wind died down and it was completely calm.", "r": "Mark 4:39", "fromGod": True},
+    {"t": "Who is this? Even the wind and the waves obey him!", "r": "Mark 4:41"},
+    {"t": "Jesus called in a loud voice, Lazarus, come out! The dead man came out.", "r": "John 11:43–44", "fromGod": True},
+    {"t": "Daughter, your faith has healed you. Go in peace and be freed from your suffering.", "r": "Mark 5:34", "fromGod": True},
+    {"t": "Take courage! It is I. Do not be afraid.", "r": "Matthew 14:27", "fromGod": True},
+    {"t": "You of little faith, why did you doubt?", "r": "Matthew 14:31", "fromGod": True},
+    {"t": "I do choose. Be clean!", "r": "Matthew 8:3", "fromGod": True},
+    {"t": "With man this is impossible, but with God all things are possible.", "r": "Matthew 19:26", "fromGod": True},
+    {"t": "Everything is possible for one who believes.", "r": "Mark 9:23", "fromGod": True},
+    {"t": "I do believe; help me overcome my unbelief!", "r": "Mark 9:24"},
+    # Night 8 — The Cross
+    {"t": "He was pierced for our transgressions, he was crushed for our iniquities; the punishment that brought us peace was on him, and by his wounds we are healed.", "r": "Isaiah 53:5"},
+    {"t": "We all, like sheep, have gone astray, each of us has turned to our own way; and the Lord has laid on him the iniquity of us all.", "r": "Isaiah 53:6"},
+    {"t": "My Father, if it is possible, may this cup be taken from me. Yet not as I will, but as you will.", "r": "Matthew 26:39", "fromGod": True},
+    {"t": "Watch and pray so that you will not fall into temptation. The spirit is willing, but the flesh is weak.", "r": "Matthew 26:41", "fromGod": True},
+    {"t": "This is my body given for you; do this in remembrance of me. This cup is the new covenant in my blood, which is poured out for you.", "r": "Luke 22:19–20", "fromGod": True},
+    {"t": "Greater love has no one than this: to lay down one's life for one's friends.", "r": "John 15:13b", "fromGod": True},
+    {"t": "Jesus called out with a loud voice, Father, into your hands I commit my spirit. When he had said this, he breathed his last.", "r": "Luke 23:46", "fromGod": True},
+    {"t": "When he had received the drink, Jesus said, It is finished. With that, he bowed his head and gave up his spirit.", "r": "John 19:30", "fromGod": True},
+    {"t": "Truly I tell you, today you will be with me in paradise.", "r": "Luke 23:43", "fromGod": True},
+    {"t": "He himself bore our sins in his body on the cross, so that we might die to sins and live for righteousness; by his wounds you have been healed.", "r": "1 Peter 2:24"},
+    # Night 9 — Resurrection
+    {"t": "He is not here; he has risen, just as he said. Come and see the place where he lay.", "r": "Matthew 28:6"},
+    {"t": "Why do you look for the living among the dead? He is not here; he has risen!", "r": "Luke 24:5–6"},
+    {"t": "Peace be with you! As the Father has sent me, I am sending you.", "r": "John 20:21", "fromGod": True},
+    {"t": "Because you have seen me, you have believed; blessed are those who have not seen and yet have believed.", "r": "John 20:29", "fromGod": True},
+    {"t": "Do not hold on to me, for I have not yet ascended to the Father. Go instead to my brothers and tell them.", "r": "John 20:17", "fromGod": True},
+    {"t": "Were not our hearts burning within us while he talked with us on the road and opened the Scriptures to us?", "r": "Luke 24:32"},
+    {"t": "Christ died for our sins according to the Scriptures, that he was buried, that he was raised on the third day according to the Scriptures.", "r": "1 Corinthians 15:3–4"},
+    {"t": "Where, O death, is your victory? Where, O death, is your sting?", "r": "1 Corinthians 15:55"},
+    {"t": "But thanks be to God! He gives us the victory through our Lord Jesus Christ.", "r": "1 Corinthians 15:57"},
+    {"t": "All authority in heaven and on earth has been given to me. Therefore go and make disciples of all nations.", "r": "Matthew 28:18–19", "fromGod": True},
+    # Night 10 — Spirit and Church
+    {"t": "But the Advocate, the Holy Spirit, whom the Father will send in my name, will teach you all things and will remind you of everything I have said to you.", "r": "John 14:26", "fromGod": True},
+    {"t": "When the day of Pentecost came, they were all together in one place. All of them were filled with the Holy Spirit.", "r": "Acts 2:1, 4"},
+    {"t": "Salvation is found in no one else, for there is no other name under heaven given to mankind by which we must be saved.", "r": "Acts 4:12"},
+    {"t": "They devoted themselves to the apostles' teaching and to fellowship, to the breaking of bread and to prayer.", "r": "Acts 2:42"},
+    {"t": "Everyone who calls on the name of the Lord will be saved.", "r": "Acts 2:21"},
+    {"t": "God has raised this Jesus to life, and we are all witnesses of it.", "r": "Acts 2:32"},
+    {"t": "Repent and be baptized, every one of you, in the name of Jesus Christ for the forgiveness of your sins. And you will receive the gift of the Holy Spirit.", "r": "Acts 2:38"},
+    {"t": "The Lord added to their number daily those who were being saved.", "r": "Acts 2:47"},
+    {"t": "We must obey God rather than human beings.", "r": "Acts 5:29"},
+    {"t": "I have been crucified with Christ and I no longer live, but Christ lives in me.", "r": "Galatians 2:20"},
+    # Night 11 — Romans
+    {"t": "For all have sinned and fall short of the glory of God.", "r": "Romans 3:23"},
+    {"t": "For the wages of sin is death, but the gift of God is eternal life in Christ Jesus our Lord.", "r": "Romans 6:23"},
+    {"t": "But God demonstrates his own love for us in this: While we were still sinners, Christ died for us.", "r": "Romans 5:8"},
+    {"t": "Therefore, there is now no condemnation for those who are in Christ Jesus.", "r": "Romans 8:1"},
+    {"t": "The Spirit you received does not make you slaves, so that you live in fear again; rather, the Spirit you received brought about your adoption to sonship.", "r": "Romans 8:15"},
+    {"t": "The Spirit himself testifies with our spirit that we are God's children.", "r": "Romans 8:16"},
+    {"t": "I consider that our present sufferings are not worth comparing with the glory that will be revealed in us.", "r": "Romans 8:18"},
+    {"t": "In the same way, the Spirit helps us in our weakness. We do not know what we ought to pray for, but the Spirit himself intercedes for us.", "r": "Romans 8:26"},
+    {"t": "If you declare with your mouth, Jesus is Lord, and believe in your heart that God raised him from the dead, you will be saved.", "r": "Romans 10:9b"},
+    {"t": "Consequently, faith comes from hearing the message, and the message is heard through the word about Christ.", "r": "Romans 10:17"},
+    # Night 12 — Live in Christ
+    {"t": "For it is by grace you have been saved, through faith — and this is not from yourselves, it is the gift of God — not by works, so that no one can boast.", "r": "Ephesians 2:8–9"},
+    {"t": "For we are God's handiwork, created in Christ Jesus to do good works, which God prepared in advance for us to do.", "r": "Ephesians 2:10"},
+    {"t": "Now to him who is able to do immeasurably more than all we ask or imagine, according to his power that is at work within us.", "r": "Ephesians 3:20"},
+    {"t": "Be completely humble and gentle; be patient, bearing with one another in love.", "r": "Ephesians 4:2"},
+    {"t": "Do not let any unwholesome talk come out of your mouths, but only what is helpful for building others up.", "r": "Ephesians 4:29"},
+    {"t": "Be kind and compassionate to one another, forgiving each other, just as in Christ God forgave you.", "r": "Ephesians 4:32"},
+    {"t": "But the fruit of the Spirit is love, joy, peace, forbearance, kindness, goodness, faithfulness, gentleness and self-control.", "r": "Galatians 5:22–23"},
+    {"t": "Let us not become weary in doing good, for at the proper time we will reap a harvest if we do not give up.", "r": "Galatians 6:9"},
+    {"t": "Whatever you do, work at it with all your heart, as working for the Lord, not for human masters.", "r": "Colossians 3:23"},
+    {"t": "And whatever you do, whether in word or deed, do it all in the name of the Lord Jesus.", "r": "Colossians 3:17"},
+    # Night 13 — Faith and love
+    {"t": "Now faith is confidence in what we hope for and assurance about what we do not see.", "r": "Hebrews 11:1"},
+    {"t": "And without faith it is impossible to please God, because anyone who comes to him must believe that he exists and that he rewards those who earnestly seek him.", "r": "Hebrews 11:6"},
+    {"t": "Let us run with perseverance the race marked out for us, fixing our eyes on Jesus, the pioneer and perfecter of faith.", "r": "Hebrews 12:1–2"},
+    {"t": "Jesus Christ is the same yesterday and today and forever.", "r": "Hebrews 13:8"},
+    {"t": "Consider it pure joy, my brothers and sisters, whenever you face trials of many kinds, because you know that the testing of your faith produces perseverance.", "r": "James 1:2–3"},
+    {"t": "If any of you lacks wisdom, you should ask God, who gives generously to all without finding fault, and it will be given to you.", "r": "James 1:5"},
+    {"t": "Every good and perfect gift is from above, coming down from the Father of the heavenly lights, who does not change like shifting shadows.", "r": "James 1:17"},
+    {"t": "Dear friends, let us love one another, for love comes from God. Everyone who loves has been born of God and knows God.", "r": "1 John 4:7"},
+    {"t": "Whoever does not love does not know God, because God is love.", "r": "1 John 4:8"},
+    {"t": "We love because he first loved us.", "r": "1 John 4:19"},
+    # Night 14 — Psalms of trust
+    {"t": "The Lord is my light and my salvation — whom shall I fear? The Lord is the stronghold of my life — of whom shall I be afraid?", "r": "Psalm 27:1"},
+    {"t": "Wait for the Lord; be strong and take heart and wait for the Lord.", "r": "Psalm 27:14"},
+    {"t": "Taste and see that the Lord is good; blessed is the one who takes refuge in him.", "r": "Psalm 34:8"},
+    {"t": "Delight yourself in the Lord, and he will give you the desires of your heart.", "r": "Psalm 37:4"},
+    {"t": "Be still before the Lord and wait patiently for him.", "r": "Psalm 37:7"},
+    {"t": "I waited patiently for the Lord; he turned to me and heard my cry.", "r": "Psalm 40:1"},
+    {"t": "As the deer pants for streams of water, so my soul pants for you, my God.", "r": "Psalm 42:1"},
+    {"t": "Why, my soul, are you downcast? Put your hope in God, for I will yet praise him, my Savior and my God.", "r": "Psalm 42:11"},
+    {"t": "Have mercy on me, O God, according to your unfailing love; according to your great compassion blot out my transgressions.", "r": "Psalm 51:1"},
+    {"t": "Create in me a pure heart, O God, and renew a steadfast spirit within me.", "r": "Psalm 51:10b"},
+    # Night 15 — More Psalms
+    {"t": "Your word is a lamp for my feet, a light on my path.", "r": "Psalm 119:105"},
+    {"t": "I have hidden your word in my heart that I might not sin against you.", "r": "Psalm 119:11"},
+    {"t": "The Lord will keep you from all harm — he will watch over your life; the Lord will watch over your coming and going both now and forevermore.", "r": "Psalm 121:7–8"},
+    {"t": "Those who trust in the Lord are like Mount Zion, which cannot be shaken but endures forever.", "r": "Psalm 125:1"},
+    {"t": "The Lord is gracious and compassionate, slow to anger and rich in love.", "r": "Psalm 145:8"},
+    {"t": "The Lord is near to all who call on him, to all who call on him in truth.", "r": "Psalm 145:18"},
+    {"t": "Praise the Lord, my soul, and forget not all his benefits — who forgives all your sins and heals all your diseases.", "r": "Psalm 103:2–3"},
+    {"t": "As far as the east is from the west, so far has he removed our transgressions from us.", "r": "Psalm 103:12"},
+    {"t": "Give thanks to the Lord, for he is good; his love endures forever.", "r": "Psalm 136:1"},
+    {"t": "Search me, God, and know my heart; test me and know my anxious thoughts.", "r": "Psalm 139:23"},
+    # Night 16 — Wisdom
+    {"t": "The fear of the Lord is the beginning of wisdom, and knowledge of the Holy One is understanding.", "r": "Proverbs 9:10"},
+    {"t": "Above all else, guard your heart, for everything you do flows from it.", "r": "Proverbs 4:23"},
+    {"t": "Trust in the Lord with all your heart and lean not on your own understanding.", "r": "Proverbs 3:5"},
+    {"t": "In all your ways submit to him, and he will make your paths straight.", "r": "Proverbs 3:6"},
+    {"t": "A gentle answer turns away wrath, but a harsh word stirs up anger.", "r": "Proverbs 15:1"},
+    {"t": "Pride goes before destruction, a haughty spirit before a fall.", "r": "Proverbs 16:18"},
+    {"t": "A friend loves at all times, and a brother is born for a time of adversity.", "r": "Proverbs 17:17"},
+    {"t": "The name of the Lord is a fortified tower; the righteous run to it and are safe.", "r": "Proverbs 18:10b"},
+    {"t": "Many are the plans in a person's heart, but it is the Lord's purpose that prevails.", "r": "Proverbs 19:21"},
+    {"t": "She is clothed with strength and dignity; she can laugh at the days to come.", "r": "Proverbs 31:25"},
+    # Night 17 — Prophets
+    {"t": "Holy, holy, holy is the Lord Almighty; the whole earth is full of his glory.", "r": "Isaiah 6:3"},
+    {"t": "Then I heard the voice of the Lord saying, Whom shall I send? And who will go for us? And I said, Here am I. Send me!", "r": "Isaiah 6:8"},
+    {"t": "Come now, let us settle the matter, says the Lord. Though your sins are like scarlet, they shall be as white as snow.", "r": "Isaiah 1:18", "fromGod": True},
+    {"t": "You will keep in perfect peace those whose minds are steadfast, because they trust in you.", "r": "Isaiah 26:3b"},
+    {"t": "But he was pierced for our transgressions — the punishment that brought us peace was on him.", "r": "Isaiah 53:5b"},
+    {"t": "See, I am doing a new thing! Now it springs up; do you not perceive it? I am making a way in the wilderness and streams in the wasteland.", "r": "Isaiah 43:19", "fromGod": True},
+    {"t": "Fear not, for I have redeemed you; I have summoned you by name; you are mine.", "r": "Isaiah 43:1", "fromGod": True},
+    {"t": "The Spirit of the Sovereign Lord is on me, because the Lord has anointed me to proclaim good news to the poor.", "r": "Isaiah 61:1"},
+    {"t": "He has shown you, O mortal, what is good. And what does the Lord require of you? To act justly and to love mercy and to walk humbly with your God.", "r": "Micah 6:8"},
+    {"t": "For I desire mercy, not sacrifice, and acknowledgment of God rather than burnt offerings.", "r": "Hosea 6:6", "fromGod": True},
+    # Night 18 — Creation and promise
+    {"t": "In the beginning God created the heavens and the earth.", "r": "Genesis 1:1"},
+    {"t": "And God said, Let there be light, and there was light.", "r": "Genesis 1:3", "fromGod": True},
+    {"t": "God saw all that he had made, and it was very good.", "r": "Genesis 1:31"},
+    {"t": "So God created mankind in his own image, in the image of God he created them; male and female he created them.", "r": "Genesis 1:27"},
+    {"t": "The Lord God said, It is not good for the man to be alone. I will make a helper suitable for him.", "r": "Genesis 2:18", "fromGod": True},
+    {"t": "I will make you into a great nation, and I will bless you; I will make your name great, and you will be a blessing.", "r": "Genesis 12:2", "fromGod": True},
+    {"t": "Abram believed the Lord, and he credited it to him as righteousness.", "r": "Genesis 15:6"},
+    {"t": "Surely the Lord is in this place, and I was not aware of it.", "r": "Genesis 28:16"},
+    {"t": "You intended to harm me, but God intended it for good to accomplish what is now being done, the saving of many lives.", "r": "Genesis 50:20"},
+    {"t": "I am who I am. This is what you are to say to the Israelites: I AM has sent me to you.", "r": "Exodus 3:14", "fromGod": True},
+    # Night 19 — Exodus and the Word
+    {"t": "The Lord will fight for you; you need only to be still.", "r": "Exodus 14:14"},
+    {"t": "I am the Lord your God, who brought you out of Egypt, out of the land of slavery. You shall have no other gods before me.", "r": "Exodus 20:2–3", "fromGod": True},
+    {"t": "You shall not make for yourself an image and bow down to it. You shall not misuse the name of the Lord your God.", "r": "Exodus 20:4–7", "fromGod": True},
+    {"t": "Remember the Sabbath day by keeping it holy.", "r": "Exodus 20:8", "fromGod": True},
+    {"t": "Honor your father and your mother, so that you may live long in the land the Lord your God is giving you.", "r": "Exodus 20:12", "fromGod": True},
+    {"t": "You shall not murder. You shall not commit adultery. You shall not steal. You shall not give false testimony. You shall not covet.", "r": "Exodus 20:13–17", "fromGod": True},
+    {"t": "The Lord, the Lord, the compassionate and gracious God, slow to anger, abounding in love and faithfulness.", "r": "Exodus 34:6"},
+    {"t": "Hear, O Israel: The Lord our God, the Lord is one. Love the Lord your God with all your heart and with all your soul and with all your strength.", "r": "Deuteronomy 6:4–5"},
+    {"t": "Be strong and courageous. Do not be afraid; do not be discouraged, for the Lord your God will be with you wherever you go.", "r": "Joshua 1:9b"},
+    {"t": "As for me and my household, we will serve the Lord.", "r": "Joshua 24:15"},
+    # Night 20 — Revelation hope
+    {"t": "Look, I am coming soon! My reward is with me, and I will give to each person according to what they have done.", "r": "Revelation 22:12", "fromGod": True},
+    {"t": "He will wipe every tear from their eyes. There will be no more death or mourning or crying or pain, for the old order of things has passed away.", "r": "Revelation 21:4"},
+    {"t": "And I heard a loud voice from the throne saying, Look! God's dwelling place is now among the people, and he will dwell with them.", "r": "Revelation 21:3"},
+    {"t": "Worthy is the Lamb, who was slain, to receive power and wealth and wisdom and strength and honor and glory and praise!", "r": "Revelation 5:12"},
+    {"t": "Holy, holy, holy is the Lord God Almighty, who was, and is, and is to come.", "r": "Revelation 4:8"},
+    {"t": "They triumphed over him by the blood of the Lamb and by the word of their testimony.", "r": "Revelation 12:11"},
+    {"t": "Behold, I stand at the door and knock.", "r": "Revelation 3:20a", "fromGod": True},
+    {"t": "To the thirsty I will give water without cost from the spring of the water of life.", "r": "Revelation 21:6", "fromGod": True},
+    {"t": "The Spirit and the bride say, Come! And let the one who hears say, Come! Let the one who is thirsty come.", "r": "Revelation 22:17"},
+    {"t": "He who testifies to these things says, Yes, I am coming soon. Amen. Come, Lord Jesus.", "r": "Revelation 22:20", "fromGod": True},
+    # Night 21 — More of Jesus' words
+    {"t": "Let the little children come to me, and do not hinder them, for the kingdom of heaven belongs to such as these.", "r": "Matthew 19:14", "fromGod": True},
+    {"t": "What good will it be for someone to gain the whole world, yet forfeit their soul?", "r": "Matthew 16:26", "fromGod": True},
+    {"t": "Whoever wants to be my disciple must deny themselves and take up their cross and follow me.", "r": "Matthew 16:24", "fromGod": True},
+    {"t": "For even the Son of Man did not come to be served, but to serve, and to give his life as a ransom for many.", "r": "Mark 10:45", "fromGod": True},
+    {"t": "A new command I give you: Love one another. As I have loved you, so you must love one another.", "r": "John 13:34", "fromGod": True},
+    {"t": "By this everyone will know that you are my disciples, if you love one another.", "r": "John 13:35", "fromGod": True},
+    {"t": "Remain in me, as I also remain in you.", "r": "John 15:4", "fromGod": True},
+    {"t": "You did not choose me, but I chose you and appointed you so that you might go and bear fruit.", "r": "John 15:16", "fromGod": True},
+    {"t": "Father, I want those you have given me to be with me where I am, and to see my glory.", "r": "John 17:24", "fromGod": True},
+    {"t": "Sanctify them by the truth; your word is truth.", "r": "John 17:17", "fromGod": True},
+    # Night 22 — Strength for the worker
+    {"t": "Commit to the Lord whatever you do, and he will establish your plans.", "r": "Proverbs 16:3"},
+    {"t": "May the favor of the Lord our God rest on us; establish the work of our hands for us — yes, establish the work of our hands.", "r": "Psalm 90:17"},
+    {"t": "Unless the Lord builds the house, the builders labor in vain.", "r": "Psalm 127:1"},
+    {"t": "I can do all this through him who gives me strength.", "r": "Philippians 4:13b"},
+    {"t": "And my God will meet all your needs according to the riches of his glory in Christ Jesus.", "r": "Philippians 4:19b"},
+    {"t": "Let us not become weary in doing good.", "r": "Galatians 6:9a"},
+    {"t": "The thief comes only to steal and kill and destroy; I have come that they may have life, and have it to the full.", "r": "John 10:10b", "fromGod": True},
+    {"t": "So do not worry, saying, What shall we eat? or What shall we drink? or What shall we wear? But seek first his kingdom and his righteousness, and all these things will be given to you as well.", "r": "Matthew 6:31, 33", "fromGod": True},
+    {"t": "Cast your cares on the Lord and he will sustain you.", "r": "Psalm 55:22b"},
+    {"t": "The blessing of the Lord brings wealth, without painful toil for it.", "r": "Proverbs 10:22b"},
+]
+
+
+HEADER = '''import type { Verse } from "./types";
+
+'''
+
+
+def write_ts(name: str, export: str, verses: list[dict], extra: str = "") -> None:
+    lines = [HEADER, extra, f"export const {export}: Verse[] = [\n"]
+    for v in verses:
+        lines.append(emit_verse(v) + ",\n")
+    lines.append("];\n")
+    path = OUT / name
+    path.write_text("".join(lines), encoding="utf-8")
+    print(f"wrote {path} ({len(verses)} verses)")
+
+
+def main() -> None:
+    OUT.mkdir(parents=True, exist_ok=True)
+    builtin = load_builtin()
+    today = with_meta(TODAY, start_idx=len(builtin), fresh=True)
+    start = builtin + today
+    catalog = with_meta(CATALOG, start_idx=1000)
+    write_ts(
+        "verses-start.ts",
+        "START_VERSES",
+        start,
+        extra=(
+            f"/** Original collection ({len(builtin)}) plus ten new passages given today. */\n"
+        ),
+    )
+    write_ts(
+        "verses-catalog.ts",
+        "CATALOG_VERSES",
+        catalog,
+        extra="/** Nightly unlock treasury — ten passages at midnight. */\n",
+    )
+    print("start scripture", sum(1 for v in start if not v.get("q")))
+    print("start quotes", sum(1 for v in start if v.get("q")))
+    print("start fromGod", sum(1 for v in start if v.get("fromGod")))
+    print("catalog", len(catalog), "fromGod", sum(1 for v in catalog if v.get("fromGod")))
+    remaining_bible = 31102 - sum(1 for v in start if not v.get("q"))
+    print("days at 10/night from here", remaining_bible / 10)
+
+
+if __name__ == "__main__":
+    main()

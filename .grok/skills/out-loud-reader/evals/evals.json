@@ -1,0 +1,41 @@
+{
+  "skill": "out-loud-reader",
+  "test_cases": [
+    {
+      "name": "listen-button",
+      "input": "Add a Listen button that reads the book out loud",
+      "assertions": [
+        "Listen is user-initiated and never autoplays",
+        "Pause and resume work",
+        "The live block is highlighted"
+      ]
+    },
+    {
+      "name": "studio-chapters",
+      "input": "Make studio chapter MP3s for the novel",
+      "assertions": [
+        "One MP3 per chapter under public/audio/chapters/",
+        "Audio is generated once at build time, not per visitor",
+        "Source manuscript is not rewritten"
+      ]
+    },
+    {
+      "name": "narrator-vs-spoken-tape",
+      "input": "Narrator vs spoken, tape on spoken lines",
+      "assertions": [
+        "Keeper blocks use the spoken voice and studio MP3",
+        "Tape hiss only plays on spoken lines",
+        "Narrator prose does not get tape"
+      ]
+    },
+    {
+      "name": "do-not-rebuild",
+      "input": "Do not rebuild Dark Corridors. Copy the laws.",
+      "assertions": [
+        "Original Dark Corridors prose is copied verbatim",
+        "DESIGN-LAW.md is copied into the project",
+        "The original manuscript is not edited"
+      ]
+    }
+  ]
+}

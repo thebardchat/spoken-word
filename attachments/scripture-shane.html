@@ -1,0 +1,573 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>The Word of God</title>
+  <link rel="preconnect" href="https://cdn.jsdelivr.net">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fontsource/eb-garamond@5/400.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fontsource/eb-garamond@5/400-italic.css">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html, body { width: 100%; height: 100%; background: #0c0905; overflow: hidden; }
+    body { display: flex; align-items: center; justify-content: center; cursor: pointer; user-select: none; font-family: system-ui, -apple-system, sans-serif; }
+
+    /* ── Cross ── */
+    .cross { position: fixed; top: 50%; left: 50%; transform: translate(-50%, -52%); opacity: 0.04; pointer-events: none; z-index: 0; }
+
+    /* ── Top label ── */
+    .top-label { position: fixed; top: 1.6rem; left: 50%; transform: translateX(-50%); display: flex; align-items: center; gap: 10px; z-index: 3; pointer-events: none; }
+    .top-label .line { width: 32px; height: 0.5px; background: #c8a96e; opacity: 0.22; }
+    .top-label span { font-size: 0.58rem; letter-spacing: 0.34em; text-transform: uppercase; color: #c8a96e; opacity: 0.3; white-space: nowrap; }
+
+    /* ── Verse ── */
+    #vc { text-align: center; max-width: 700px; width: 90%; padding: 0 2rem; opacity: 0; transition: opacity 2.5s ease-in-out; position: relative; z-index: 2; }
+    .divider { width: 36px; height: 0.5px; background: #c8a96e; margin: 0 auto; opacity: 0.38; }
+    #vt { font-family: 'EB Garamond','Palatino Linotype','Book Antiqua',Georgia,serif; font-size: clamp(1.2rem,2.4vw,1.85rem); line-height: 1.95; color: #f0e8d8; letter-spacing: 0.02em; margin: 2rem 0; font-style: italic; font-weight: 400; }
+    #vt.quote { font-style: normal; color: #ede0c8; }
+    #vr { font-size: 0.67rem; letter-spacing: 0.26em; text-transform: uppercase; color: #c8a96e; opacity: 0.65; font-weight: 400; }
+    #vr.quote { color: #d4a85a; opacity: 0.78; letter-spacing: 0.18em; }
+
+    /* ── Favorite heart ── */
+    #fav-btn {
+      position: absolute; right: -3rem; top: 50%; transform: translateY(-50%);
+      background: none; border: none; cursor: pointer; padding: 8px;
+      font-size: 1.3rem; opacity: 0.25; transition: opacity 0.3s, transform 0.2s;
+      color: #c8a96e; z-index: 5;
+    }
+    #fav-btn:hover { opacity: 0.8; transform: translateY(-50%) scale(1.2); }
+    #fav-btn.active { opacity: 0.9; color: #e87070; }
+
+    /* ── Progress bar ── */
+    #pb { position: fixed; bottom: 0; left: 0; height: 1px; background: #c8a96e; opacity: 0.14; width: 0%; }
+
+    /* ── Dots ── */
+    #dots { position: fixed; bottom: 1.4rem; left: 50%; transform: translateX(-50%); display: flex; gap: 4px; align-items: center; z-index: 3; pointer-events: none; flex-wrap: wrap; justify-content: center; max-width: 460px; }
+    .dot { width: 2.5px; height: 2.5px; border-radius: 50%; background: #c8a96e; opacity: 0.12; transition: opacity 0.8s, transform 0.5s; flex-shrink: 0; }
+    .dot.on { opacity: 0.7; transform: scale(1.7); }
+    .dot.fav { background: #e87070; opacity: 0.5; }
+    .dot.fav.on { opacity: 0.9; }
+
+    /* ── Controls ── */
+    .controls { position: fixed; top: 1rem; right: 1rem; display: flex; gap: 6px; z-index: 10; }
+    .ctrl-btn {
+      background: transparent; border: 0.5px solid rgba(200,169,110,0.2); color: rgba(200,169,110,0.45);
+      padding: 5px 10px; border-radius: 6px; cursor: pointer; font-size: 0.6rem;
+      letter-spacing: 0.1em; text-transform: uppercase; opacity: 0.35; transition: opacity 0.3s, border-color 0.3s;
+    }
+    .ctrl-btn:hover { opacity: 1; border-color: rgba(200,169,110,0.5); }
+    .ctrl-btn.danger:hover { color: #e87070; border-color: rgba(232,112,112,0.4); }
+
+    /* ── Pause indicator ── */
+    #pind { position: fixed; bottom: 3.5rem; left: 50%; transform: translateX(-50%); color: rgba(200,169,110,0.45); font-size: 0.6rem; letter-spacing: 0.2em; text-transform: uppercase; opacity: 0; transition: opacity 0.4s; pointer-events: none; white-space: nowrap; }
+    #vcnt { position: fixed; bottom: 1.35rem; right: 1.2rem; font-size: 0.58rem; letter-spacing: 0.18em; color: #c8a96e; opacity: 0.22; pointer-events: none; }
+    #hint { position: fixed; bottom: 1.35rem; left: 1.2rem; font-size: 0.55rem; letter-spacing: 0.14em; color: #c8a96e; opacity: 0.18; pointer-events: none; }
+
+    /* ════════════════════════════════════════════
+       ADD VERSE PANEL
+    ════════════════════════════════════════════ */
+    #add-panel {
+      position: fixed; inset: 0; background: rgba(8,6,3,0.96);
+      display: flex; align-items: center; justify-content: center;
+      z-index: 100; opacity: 0; pointer-events: none; transition: opacity 0.4s;
+    }
+    #add-panel.open { opacity: 1; pointer-events: all; }
+    .panel-inner {
+      background: #110e09; border: 0.5px solid rgba(200,169,110,0.18);
+      border-radius: 10px; padding: 2.4rem 2.2rem; width: min(520px, 90vw);
+      display: flex; flex-direction: column; gap: 1rem;
+    }
+    .panel-title { font-size: 0.62rem; letter-spacing: 0.3em; text-transform: uppercase; color: #c8a96e; opacity: 0.55; margin-bottom: 0.4rem; }
+    .panel-inner textarea, .panel-inner input {
+      background: #0c0905; border: 0.5px solid rgba(200,169,110,0.22);
+      color: #f0e8d8; border-radius: 6px; padding: 0.85rem 1rem;
+      font-family: 'EB Garamond','Palatino Linotype',Georgia,serif;
+      font-size: 1.05rem; font-style: italic; resize: none; outline: none;
+      transition: border-color 0.2s; width: 100%;
+    }
+    .panel-inner input { font-style: normal; font-size: 0.78rem; font-family: system-ui,sans-serif; letter-spacing: 0.06em; }
+    .panel-inner textarea:focus, .panel-inner input:focus { border-color: rgba(200,169,110,0.5); }
+    .panel-inner textarea::placeholder, .panel-inner input::placeholder { color: rgba(200,169,110,0.25); font-style: italic; }
+    .panel-inner input::placeholder { font-style: normal; }
+    .panel-row { display: flex; gap: 0.7rem; align-items: center; }
+    .type-toggle { display: flex; gap: 0; border: 0.5px solid rgba(200,169,110,0.2); border-radius: 6px; overflow: hidden; }
+    .type-toggle button {
+      background: transparent; border: none; color: rgba(200,169,110,0.4);
+      padding: 6px 14px; font-size: 0.6rem; letter-spacing: 0.12em; text-transform: uppercase;
+      cursor: pointer; transition: background 0.2s, color 0.2s;
+    }
+    .type-toggle button.active { background: rgba(200,169,110,0.12); color: #c8a96e; }
+    .panel-actions { display: flex; justify-content: flex-end; gap: 0.6rem; margin-top: 0.4rem; }
+    .btn-cancel { background: transparent; border: 0.5px solid rgba(200,169,110,0.15); color: rgba(200,169,110,0.35); padding: 7px 16px; border-radius: 6px; cursor: pointer; font-size: 0.6rem; letter-spacing: 0.12em; text-transform: uppercase; transition: opacity 0.2s; }
+    .btn-cancel:hover { opacity: 0.8; }
+    .btn-save { background: rgba(200,169,110,0.1); border: 0.5px solid rgba(200,169,110,0.35); color: #c8a96e; padding: 7px 18px; border-radius: 6px; cursor: pointer; font-size: 0.6rem; letter-spacing: 0.12em; text-transform: uppercase; transition: background 0.2s; }
+    .btn-save:hover { background: rgba(200,169,110,0.18); }
+
+    /* ════════════════════════════════════════════
+       TOAST
+    ════════════════════════════════════════════ */
+    #toast {
+      position: fixed; bottom: 4.5rem; left: 50%; transform: translateX(-50%);
+      background: rgba(200,169,110,0.12); border: 0.5px solid rgba(200,169,110,0.25);
+      color: #c8a96e; font-size: 0.62rem; letter-spacing: 0.16em; text-transform: uppercase;
+      padding: 8px 18px; border-radius: 6px; opacity: 0; pointer-events: none;
+      transition: opacity 0.4s; white-space: nowrap; z-index: 200;
+    }
+
+    /* ════════════════════════════════════════════
+       FAVORITES PANEL
+    ════════════════════════════════════════════ */
+    #fav-panel {
+      position: fixed; inset: 0; background: rgba(8,6,3,0.96);
+      display: flex; align-items: center; justify-content: center;
+      z-index: 100; opacity: 0; pointer-events: none; transition: opacity 0.4s;
+    }
+    #fav-panel.open { opacity: 1; pointer-events: all; }
+    .fav-inner {
+      background: #110e09; border: 0.5px solid rgba(200,169,110,0.18);
+      border-radius: 10px; padding: 2rem; width: min(560px, 90vw);
+      max-height: 80vh; display: flex; flex-direction: column; gap: 1rem;
+    }
+    .fav-header { display: flex; align-items: center; justify-content: space-between; }
+    .fav-header span { font-size: 0.62rem; letter-spacing: 0.3em; text-transform: uppercase; color: #c8a96e; opacity: 0.55; }
+    .fav-list { overflow-y: auto; display: flex; flex-direction: column; gap: 0.75rem; padding-right: 0.3rem; }
+    .fav-list::-webkit-scrollbar { width: 3px; }
+    .fav-list::-webkit-scrollbar-track { background: transparent; }
+    .fav-list::-webkit-scrollbar-thumb { background: rgba(200,169,110,0.2); border-radius: 2px; }
+    .fav-item {
+      background: rgba(200,169,110,0.04); border: 0.5px solid rgba(200,169,110,0.1);
+      border-radius: 6px; padding: 0.9rem 1rem; cursor: pointer; transition: border-color 0.2s;
+    }
+    .fav-item:hover { border-color: rgba(200,169,110,0.3); }
+    .fav-item p { font-family: 'EB Garamond',Georgia,serif; font-style: italic; font-size: 0.95rem; color: #f0e8d8; line-height: 1.7; margin-bottom: 0.4rem; }
+    .fav-item span { font-size: 0.58rem; letter-spacing: 0.2em; text-transform: uppercase; color: #c8a96e; opacity: 0.5; }
+    .fav-empty { text-align: center; color: rgba(200,169,110,0.25); font-size: 0.7rem; letter-spacing: 0.15em; text-transform: uppercase; padding: 2rem 0; }
+  </style>
+</head>
+<body>
+
+  <svg class="cross" width="120" height="170" viewBox="0 0 120 170" aria-hidden="true">
+    <rect x="52" y="8" width="16" height="154" fill="#c8a96e"/>
+    <rect x="16" y="52" width="88" height="16" fill="#c8a96e"/>
+  </svg>
+
+  <div class="top-label">
+    <div class="line"></div>
+    <span>The Word of God</span>
+    <div class="line"></div>
+  </div>
+
+  <div id="vc">
+    <div class="divider"></div>
+    <p id="vt"></p>
+    <p id="vr"></p>
+    <div class="divider"></div>
+    <button id="fav-btn" title="Save to favorites">♡</button>
+  </div>
+
+  <div id="pb"></div>
+  <div id="dots"></div>
+
+  <div class="controls">
+    <button class="ctrl-btn" onclick="prevVerse(event)">&#8592;</button>
+    <button class="ctrl-btn" id="pause-btn" onclick="togglePause(event)">Pause</button>
+    <button class="ctrl-btn" onclick="openFavPanel(event)">&#9829; Saved</button>
+    <button class="ctrl-btn" onclick="openAddPanel(event)">+ Add</button>
+    <button class="ctrl-btn" onclick="goFS(event)">Fullscreen</button>
+  </div>
+
+  <div id="pind">&#9646;&#9646; Paused — click or Space to resume</div>
+  <div id="vcnt"></div>
+  <div id="hint">Space · ← → · F · + Add verse anytime</div>
+  <div id="toast"></div>
+
+  <!-- ── ADD VERSE PANEL ─────────────────────────────────── -->
+  <div id="add-panel">
+    <div class="panel-inner">
+      <div class="panel-title">Add a verse or saying</div>
+      <textarea id="add-text" rows="4" placeholder="Type the verse or quote here..."></textarea>
+      <input id="add-ref" type="text" placeholder="Reference — e.g. Psalm 27:1  or  — Tim Tebow">
+      <div class="panel-row">
+        <span style="font-size:0.6rem;letter-spacing:0.15em;text-transform:uppercase;color:rgba(200,169,110,0.4);">Type:</span>
+        <div class="type-toggle">
+          <button id="type-scripture" class="active" onclick="setType('scripture')">Scripture</button>
+          <button id="type-quote" onclick="setType('quote')">Quote</button>
+        </div>
+      </div>
+      <div class="panel-actions">
+        <button class="btn-cancel" onclick="closeAddPanel()">Cancel</button>
+        <button class="btn-save" onclick="saveVerse()">Save to Display</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── FAVORITES PANEL ────────────────────────────────── -->
+  <div id="fav-panel">
+    <div class="fav-inner">
+      <div class="fav-header">
+        <span>&#9829; Saved Verses</span>
+        <button class="btn-cancel" onclick="closeFavPanel()">Close</button>
+      </div>
+      <div class="fav-list" id="fav-list"></div>
+    </div>
+  </div>
+
+  <script>
+  // ═══════════════════════════════════════════════════════
+  //  BUILT-IN VERSES (97 entries)
+  // ═══════════════════════════════════════════════════════
+  const BUILTIN = [
+    { t: "For God so loved the world that he gave his one and only Son, that whoever believes in him shall not perish but have eternal life.", r: "John 3:16" },
+    { t: "I am the way and the truth and the life. No one comes to the Father except through me.", r: "John 14:6" },
+    { t: "Come to me, all you who are weary and burdened, and I will give you rest.", r: "Matthew 11:28" },
+    { t: "Peace I leave with you; my peace I give you. Do not let your hearts be troubled and do not be afraid.", r: "John 14:27" },
+    { t: "I am the light of the world. Whoever follows me will never walk in darkness, but will have the light of life.", r: "John 8:12" },
+    { t: "I am the resurrection and the life. The one who believes in me will live, even though they die.", r: "John 11:25" },
+    { t: "I have come that they may have life, and have it to the full.", r: "John 10:10" },
+    { t: "I am with you always, to the very end of the age.", r: "Matthew 28:20" },
+    { t: "Greater love has no one than this: to lay down one's life for one's friends.", r: "John 15:13" },
+    { t: "Ask and it will be given to you; seek and you will find; knock and the door will be opened to you.", r: "Matthew 7:7" },
+    { t: "Blessed are the pure in heart, for they will see God.", r: "Matthew 5:8" },
+    { t: "In this world you will have trouble. But take heart — I have overcome the world.", r: "John 16:33" },
+    { t: "Do not worry about tomorrow, for tomorrow will worry about itself. Each day has enough trouble of its own.", r: "Matthew 6:34" },
+    { t: "So do not fear, for I am with you; do not be dismayed, for I am your God. I will strengthen you and help you; I will uphold you with my righteous right hand.", r: "Isaiah 41:10" },
+    { t: "For God has not given us a spirit of fear, but of power and of love and of a sound mind.", r: "2 Timothy 1:7" },
+    { t: "Be strong and courageous. Do not be afraid; do not be discouraged, for the Lord your God will be with you wherever you go.", r: "Joshua 1:9" },
+    { t: "Even though I walk through the darkest valley, I will fear no evil, for you are with me; your rod and your staff, they comfort me.", r: "Psalm 23:4" },
+    { t: "God is our refuge and strength, an ever-present help in trouble.", r: "Psalm 46:1" },
+    { t: "The Lord is my rock, my fortress and my deliverer; my God is my rock, in whom I take refuge, my shield and the horn of my salvation, my stronghold.", r: "Psalm 18:2" },
+    { t: "Be still, and know that I am God.", r: "Psalm 46:10" },
+    { t: "The Lord is close to the brokenhearted and saves those who are crushed in spirit.", r: "Psalm 34:18" },
+    { t: "My flesh and my heart may fail, but God is the strength of my heart and my portion forever.", r: "Psalm 73:26" },
+    { t: "Cast all your anxiety on him because he cares for you.", r: "1 Peter 5:7" },
+    { t: "Cast your cares on the Lord and he will sustain you; he will never let the righteous be shaken.", r: "Psalm 55:22" },
+    { t: "He heals the brokenhearted and binds up their wounds.", r: "Psalm 147:3" },
+    { t: "Do not be anxious about anything, but in every situation, by prayer and petition, with thanksgiving, present your requests to God. And the peace of God, which transcends all understanding, will guard your hearts and your minds in Christ Jesus.", r: "Philippians 4:6–7" },
+    { t: "May the God of hope fill you with all joy and peace as you trust in him, so that you may overflow with hope by the power of the Holy Spirit.", r: "Romans 15:13" },
+    { t: "Yes, my soul, find rest in God; my hope comes from him. Truly he is my rock and my salvation; he is my fortress, I will not be shaken.", r: "Psalm 62:5–6" },
+    { t: "You will keep in perfect peace those whose minds are steadfast, because they trust in you.", r: "Isaiah 26:3" },
+    { t: "Come near to God and he will come near to you.", r: "James 4:8" },
+    { t: "The Lord is my shepherd; I shall not want.", r: "Psalm 23:1" },
+    { t: "Finally, be strong in the Lord and in his mighty power. Put on the full armor of God, so that you can take your stand against the devil's schemes.", r: "Ephesians 6:10–11" },
+    { t: "Take up the shield of faith, with which you can extinguish all the flaming arrows of the evil one.", r: "Ephesians 6:16" },
+    { t: "Submit yourselves, then, to God. Resist the devil, and he will flee from you.", r: "James 4:7" },
+    { t: "The weapons we fight with are not the weapons of the world. On the contrary, they have divine power to demolish strongholds.", r: "2 Corinthians 10:4" },
+    { t: "No temptation has overtaken you except what is common to mankind. And God is faithful; he will not let you be tempted beyond what you can bear.", r: "1 Corinthians 10:13" },
+    { t: "Do not grieve, for the joy of the Lord is your strength.", r: "Nehemiah 8:10" },
+    { t: "Greater is he that is in you, than he that is in the world.", r: "1 John 4:4" },
+    { t: "And my God will meet all your needs according to the riches of his glory in Christ Jesus.", r: "Philippians 4:19" },
+    { t: "Seek first his kingdom and his righteousness, and all these things will be given to you as well.", r: "Matthew 6:33" },
+    { t: "I was young and now I am old, yet I have never seen the righteous forsaken or their children begging bread.", r: "Psalm 37:25" },
+    { t: "God is able to bless you abundantly, so that in all things at all times, having all that you need, you will abound in every good work.", r: "2 Corinthians 9:8" },
+    { t: "Consider the ravens: They do not sow or reap, they have no storeroom or barn; yet God feeds them. And how much more valuable you are than birds!", r: "Luke 12:24" },
+    { t: "Those who fear the Lord lack nothing. The lions may grow weak and hungry, but those who seek the Lord lack no good thing.", r: "Psalm 34:9–10" },
+    { t: "The Lord your God is with you, the Mighty Warrior who saves. He will take great delight in you; in his love he will rejoice over you with singing.", r: "Zephaniah 3:17" },
+    { t: "Trust in the Lord with all your heart and lean not on your own understanding; in all your ways submit to him, and he will make your paths straight.", r: "Proverbs 3:5–6" },
+    { t: "The blessing of the Lord brings wealth, without painful toil for it.", r: "Proverbs 10:22" },
+    { t: "Those who hope in the Lord will renew their strength. They will soar on wings like eagles; they will run and not grow weary, they will walk and not be faint.", r: "Isaiah 40:31" },
+    { t: "He gives strength to the weary and increases the power of the weak.", r: "Isaiah 40:29" },
+    { t: "I can do all things through Christ who strengthens me.", r: "Philippians 4:13" },
+    { t: "And we know that in all things God works for the good of those who love him.", r: "Romans 8:28" },
+    { t: "If God is for us, who can be against us?", r: "Romans 8:31" },
+    { t: "Neither death nor life, neither angels nor demons, neither the present nor the future — nothing in all creation will be able to separate us from the love of God that is in Christ Jesus our Lord.", r: "Romans 8:38–39" },
+    { t: "My grace is sufficient for you, for my power is made perfect in weakness.", r: "2 Corinthians 12:9" },
+    { t: "For I know the plans I have for you, declares the Lord — plans to prosper you and not to harm you, plans to give you hope and a future.", r: "Jeremiah 29:11" },
+    { t: "The Lord is my strength and my shield; my heart trusts in him, and he helps me.", r: "Psalm 28:7" },
+    { t: "The Lord bless you and keep you; the Lord make his face shine on you and be gracious to you; the Lord turn his face toward you and give you peace.", r: "Numbers 6:24–26" },
+    { t: "The name of the Lord is a fortified tower; the righteous run to it and are safe.", r: "Proverbs 18:10" },
+    { t: "Weeping may stay for the night, but rejoicing comes in the morning.", r: "Psalm 30:5" },
+    { t: "I lift up my eyes to the mountains — where does my help come from? My help comes from the Lord, the Maker of heaven and earth.", r: "Psalm 121:1–2" },
+    { t: "Create in me a pure heart, O God, and renew a steadfast spirit within me.", r: "Psalm 51:10" },
+    { t: "Faith is not about everything turning out okay. Faith is about being okay no matter how things turn out.", r: "— Tim Tebow", q: true },
+    { t: "If you are putting God first, everything else will fall into place.", r: "— Tim Tebow", q: true },
+    { t: "I want to be remembered as someone who truly gave everything he had for the Lord and for others.", r: "— Tim Tebow", q: true },
+    { t: "My purpose is to make a difference in people's lives. That is way more important than anything I will ever do on a field.", r: "— Tim Tebow", q: true },
+    { t: "Hard work beats talent when talent doesn't work hard. But faith beats everything.", r: "— Tim Tebow", q: true },
+    { t: "There is no pit so deep that God's love is not deeper still.", r: "— Corrie ten Boom", q: true },
+    { t: "Worry does not empty tomorrow of its sorrow; it empties today of its strength.", r: "— Corrie ten Boom", q: true },
+    { t: "When a train goes through a tunnel and it gets dark, you don't throw away the ticket and jump off. You sit still and trust the engineer.", r: "— Corrie ten Boom", q: true },
+    { t: "If you can't get a miracle, you can still be a miracle for someone else.", r: "— Nick Vujicic", q: true },
+    { t: "If I can trust in God with my life the way it is, you can trust God with yours.", r: "— Nick Vujicic", q: true },
+    { t: "God specializes in turning setbacks into comebacks.", r: "— Nick Vujicic", q: true },
+    { t: "You may not have all you want, but you have everything you need for God's plan right now.", r: "— Nick Vujicic", q: true },
+    { t: "I believe in Christianity as I believe that the sun has risen — not only because I see it, but because by it I see everything else.", r: "— C.S. Lewis", q: true },
+    { t: "God cannot give us happiness and peace apart from Himself, because it is not there. There is no such thing.", r: "— C.S. Lewis", q: true },
+    { t: "Hardships often prepare ordinary people for an extraordinary destiny.", r: "— C.S. Lewis", q: true },
+    { t: "We are not necessarily doubting that God will do the best for us; we are wondering how painful the best will turn out to be.", r: "— C.S. Lewis", q: true },
+    { t: "God proved His love on the Cross. When Christ hung, and bled, and died — it was God saying to the world: I love you.", r: "— Billy Graham", q: true },
+    { t: "When wealth is lost, nothing is lost; when health is lost, something is lost; when character is lost, all is lost.", r: "— Billy Graham", q: true },
+    { t: "Do not have your concert first and tune your instrument afterward. Begin the day with God.", r: "— Billy Graham", q: true },
+    { t: "Comfort and prosperity have never enriched the world as much as adversity has.", r: "— Billy Graham", q: true },
+    { t: "I have learned to kiss the wave that throws me against the Rock of Ages.", r: "— Charles Spurgeon", q: true },
+    { t: "A Bible that is falling apart usually belongs to someone who isn't.", r: "— Charles Spurgeon", q: true },
+    { t: "By perseverance the snail reached the ark.", r: "— Charles Spurgeon", q: true },
+    { t: "Courage is fear that has said its prayers and decided to go forward anyway.", r: "— Joyce Meyer", q: true },
+    { t: "You cannot have a positive life and a negative mind.", r: "— Joyce Meyer", q: true },
+    { t: "God never said the road would be easy, but He said He would be with us every step of the way.", r: "— Joyce Meyer", q: true },
+    { t: "You weren't an accident. You weren't mass produced. You were deliberately planned, specifically gifted, and lovingly positioned on the earth by the Master Craftsman.", r: "— Max Lucado", q: true },
+    { t: "God loves you just the way you are, but He refuses to leave you that way.", r: "— Max Lucado", q: true },
+    { t: "Our God specializes in turning messes into miracles.", r: "— Max Lucado", q: true },
+    { t: "Our heart is restless, O Lord, until it finds its rest in Thee.", r: "— St. Augustine", q: true },
+    { t: "Faith is to believe what you do not see; the reward of this faith is to see what you believe.", r: "— St. Augustine", q: true },
+    { t: "Faith is taking the first step even when you don't see the whole staircase.", r: "— Martin Luther King Jr.", q: true },
+    { t: "We must accept finite disappointment, but never lose infinite hope.", r: "— Martin Luther King Jr.", q: true },
+    { t: "God's favor is not based on your performance; it is based on your relationship with Him.", r: "— Tony Evans", q: true },
+    { t: "When you are in your darkest moment, do not close your eyes. Open your Bible.", r: "— Tony Evans", q: true },
+    { t: "You cannot fix yourself. But you can present yourself to the One who can.", r: "— Tony Evans", q: true },
+    { t: "Faith is not a sense, nor sight, nor reason, but taking God at His Word.", r: "— Oswald Chambers", q: true },
+    { t: "God does not give us overcoming life. He gives us life as we overcome.", r: "— Oswald Chambers", q: true },
+  ];
+
+  // ═══════════════════════════════════════════════════════
+  //  PERSISTENT STORAGE — localStorage
+  //  Keys: sb_added_verses, sb_favorites
+  // ═══════════════════════════════════════════════════════
+  function loadAdded() {
+    try { return JSON.parse(localStorage.getItem('sb_added_verses') || '[]'); } catch { return []; }
+  }
+  function saveAdded(arr) {
+    try { localStorage.setItem('sb_added_verses', JSON.stringify(arr)); } catch {}
+  }
+  function loadFavs() {
+    try { return JSON.parse(localStorage.getItem('sb_favorites') || '[]'); } catch { return []; }
+  }
+  function saveFavs(arr) {
+    try { localStorage.setItem('sb_favorites', JSON.stringify(arr)); } catch {}
+  }
+
+  // Build full verse list: builtin + user-added
+  let ADDED = loadAdded();
+  let FAVS  = loadFavs(); // array of verse index refs (by text key)
+
+  function buildList() {
+    return [...BUILTIN, ...ADDED];
+  }
+  let V = buildList();
+
+  function isFav(v) { return FAVS.includes(v.t); }
+
+  // ═══════════════════════════════════════════════════════
+  //  DOM refs
+  // ═══════════════════════════════════════════════════════
+  const vcEl   = document.getElementById('vc');
+  const vtEl   = document.getElementById('vt');
+  const vrEl   = document.getElementById('vr');
+  const dotsEl = document.getElementById('dots');
+  const pbEl   = document.getElementById('pb');
+  const pindEl = document.getElementById('pind');
+  const vcntEl = document.getElementById('vcnt');
+  const pbtnEl = document.getElementById('pause-btn');
+  const favBtn = document.getElementById('fav-btn');
+  const toastEl= document.getElementById('toast');
+
+  const FADE = 2500, HOLD = 10000;
+  let cur = 0, timers = [], paused = false;
+
+  // ═══════════════════════════════════════════════════════
+  //  DOTS — rebuild when list changes
+  // ═══════════════════════════════════════════════════════
+  function buildDots() {
+    dotsEl.innerHTML = '';
+    V.forEach((v, i) => {
+      const d = document.createElement('div');
+      d.className = 'dot' + (isFav(v) ? ' fav' : '');
+      dotsEl.appendChild(d);
+    });
+  }
+
+  function setDots(i) {
+    Array.from(dotsEl.children).forEach((d, j) => {
+      const base = isFav(V[j]) ? 'dot fav' : 'dot';
+      d.className = base + (j === i ? ' on' : '');
+    });
+  }
+
+  // ═══════════════════════════════════════════════════════
+  //  PLAYBACK
+  // ═══════════════════════════════════════════════════════
+  function clearTimers() { timers.forEach(clearTimeout); timers = []; }
+
+  function startPB(ms) {
+    pbEl.style.transition = 'none';
+    pbEl.style.width = '0%';
+    requestAnimationFrame(() => requestAnimationFrame(() => {
+      pbEl.style.transition = `width ${ms}ms linear`;
+      pbEl.style.width = '100%';
+    }));
+  }
+
+  function show(i) {
+    clearTimers();
+    const v = V[i];
+    vtEl.textContent = v.t;
+    vrEl.textContent = v.r;
+    vtEl.className = v.q ? 'quote' : '';
+    vrEl.className = v.q ? 'quote' : '';
+    vcntEl.textContent = (i + 1) + ' / ' + V.length;
+    setDots(i);
+    favBtn.textContent = isFav(v) ? '♥' : '♡';
+    favBtn.className   = isFav(v) ? 'active' : '';
+    startPB(HOLD + FADE);
+    vcEl.style.opacity = '1';
+    timers.push(setTimeout(() => {
+      vcEl.style.opacity = '0';
+      timers.push(setTimeout(() => {
+        cur = (i + 1) % V.length;
+        show(cur);
+      }, FADE + 120));
+    }, HOLD));
+  }
+
+  function togglePause(e) {
+    if (e) e.stopPropagation();
+    paused = !paused;
+    if (paused) { clearTimers(); pbEl.style.transition = 'none'; pindEl.style.opacity = '1'; pbtnEl.textContent = 'Resume'; }
+    else { pindEl.style.opacity = '0'; pbtnEl.textContent = 'Pause'; show(cur); }
+  }
+
+  function prevVerse(e) {
+    if (e) e.stopPropagation();
+    clearTimers(); paused = false; pindEl.style.opacity = '0'; pbtnEl.textContent = 'Pause';
+    vcEl.style.opacity = '0';
+    setTimeout(() => { cur = (cur - 1 + V.length) % V.length; show(cur); }, 400);
+  }
+
+  function nextVerse() {
+    clearTimers(); paused = false; pindEl.style.opacity = '0'; pbtnEl.textContent = 'Pause';
+    vcEl.style.opacity = '0';
+    setTimeout(() => { cur = (cur + 1) % V.length; show(cur); }, 400);
+  }
+
+  function goFS(e) {
+    if (e) e.stopPropagation();
+    if (document.fullscreenElement) { document.exitFullscreen(); }
+    else { document.documentElement.requestFullscreen && document.documentElement.requestFullscreen(); }
+  }
+
+  // ═══════════════════════════════════════════════════════
+  //  FAVORITES
+  // ═══════════════════════════════════════════════════════
+  favBtn.addEventListener('click', e => {
+    e.stopPropagation();
+    const v = V[cur];
+    if (isFav(v)) {
+      FAVS = FAVS.filter(t => t !== v.t);
+      toast('Removed from saved');
+    } else {
+      FAVS.push(v.t);
+      toast('Saved ♥');
+    }
+    saveFavs(FAVS);
+    favBtn.textContent = isFav(v) ? '♥' : '♡';
+    favBtn.className   = isFav(v) ? 'active' : '';
+    setDots(cur);
+  });
+
+  function openFavPanel(e) {
+    e.stopPropagation();
+    renderFavList();
+    document.getElementById('fav-panel').classList.add('open');
+  }
+  function closeFavPanel() {
+    document.getElementById('fav-panel').classList.remove('open');
+  }
+  function renderFavList() {
+    const list = document.getElementById('fav-list');
+    const saved = V.filter(v => isFav(v));
+    if (!saved.length) {
+      list.innerHTML = '<div class="fav-empty">No saved verses yet.<br>Tap ♡ on any verse to save it.</div>';
+      return;
+    }
+    list.innerHTML = '';
+    saved.forEach((v, i) => {
+      const el = document.createElement('div');
+      el.className = 'fav-item';
+      el.innerHTML = `<p>${v.t}</p><span>${v.r}</span>`;
+      el.addEventListener('click', () => {
+        const idx = V.findIndex(x => x.t === v.t);
+        if (idx !== -1) { cur = idx; show(cur); }
+        closeFavPanel();
+      });
+      list.appendChild(el);
+    });
+  }
+
+  // ═══════════════════════════════════════════════════════
+  //  ADD VERSE PANEL
+  // ═══════════════════════════════════════════════════════
+  let addType = 'scripture';
+
+  function openAddPanel(e) {
+    e.stopPropagation();
+    document.getElementById('add-panel').classList.add('open');
+    document.getElementById('add-text').focus();
+  }
+  function closeAddPanel() {
+    document.getElementById('add-panel').classList.remove('open');
+    document.getElementById('add-text').value = '';
+    document.getElementById('add-ref').value = '';
+    setType('scripture');
+  }
+  function setType(t) {
+    addType = t;
+    document.getElementById('type-scripture').className = t === 'scripture' ? 'active' : '';
+    document.getElementById('type-quote').className     = t === 'quote'     ? 'active' : '';
+  }
+  function saveVerse() {
+    const text = document.getElementById('add-text').value.trim();
+    const ref  = document.getElementById('add-ref').value.trim();
+    if (!text) { toast('Add the verse text first'); return; }
+    const entry = { t: text, r: ref || '', q: addType === 'quote', added: true };
+    ADDED.push(entry);
+    saveAdded(ADDED);
+    V = buildList();
+    buildDots();
+    closeAddPanel();
+    // jump to the new verse
+    cur = V.length - 1;
+    vcEl.style.opacity = '0';
+    setTimeout(() => show(cur), 300);
+    toast('Added to your display ✓');
+  }
+
+  // ═══════════════════════════════════════════════════════
+  //  TOAST
+  // ═══════════════════════════════════════════════════════
+  let toastTimer;
+  function toast(msg) {
+    toastEl.textContent = msg;
+    toastEl.style.opacity = '1';
+    clearTimeout(toastTimer);
+    toastTimer = setTimeout(() => { toastEl.style.opacity = '0'; }, 2200);
+  }
+
+  // ═══════════════════════════════════════════════════════
+  //  KEYBOARD
+  // ═══════════════════════════════════════════════════════
+  document.body.addEventListener('click', e => {
+    if (e.target.closest('.ctrl-btn') || e.target.closest('#add-panel') || e.target.closest('#fav-panel') || e.target.closest('#fav-btn')) return;
+    togglePause(null);
+  });
+
+  document.addEventListener('keydown', e => {
+    const addOpen = document.getElementById('add-panel').classList.contains('open');
+    const favOpen = document.getElementById('fav-panel').classList.contains('open');
+    if (addOpen || favOpen) {
+      if (e.key === 'Escape') { closeAddPanel(); closeFavPanel(); }
+      return;
+    }
+    if (e.key === ' ' || e.key === 'Spacebar') { e.preventDefault(); togglePause(null); }
+    if (e.key === 'ArrowRight') nextVerse();
+    if (e.key === 'ArrowLeft')  prevVerse(null);
+    if (e.key === 'f' || e.key === 'F') goFS(null);
+    if (e.key === 'a' || e.key === 'A') openAddPanel({ stopPropagation: () => {} });
+  });
+
+  // ═══════════════════════════════════════════════════════
+  //  INIT
+  // ═══════════════════════════════════════════════════════
+  buildDots();
+  setTimeout(() => show(0), 600);
+  </script>
+</body>
+</html>

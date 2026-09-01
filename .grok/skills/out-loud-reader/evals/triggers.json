@@ -1,0 +1,10 @@
+{
+  "skill": "out-loud-reader",
+  "test_cases": [
+    { "input": "Install the out-loud-reader skill and add a Listen button", "should_trigger": true },
+    { "input": "studio chapter MP3s, narrator vs spoken, tape on spoken lines", "should_trigger": true },
+    { "input": "read this novel out loud with tape hiss on keeper lines", "should_trigger": true },
+    { "input": "rebuild the Dark Corridors combat game", "should_trigger": false },
+    { "input": "add a login page and database", "should_trigger": false }
+  ]
+}

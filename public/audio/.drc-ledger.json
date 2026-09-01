@@ -1,0 +1,1097 @@
+{
+  "version": 1,
+  "files": {
+    "sweet/1-corinthians-10-13.mp3": {
+      "size": 316020,
+      "mtime": 1788293288465,
+      "kind": "sweet",
+      "filter": "acompressor=threshold=0.125:ratio=2.8:attack=12:release=110:makeup=2.4:knee=2.5:detection=rms,alimiter=limit=0.75:level=false:attack=7:release=80",
+      "at": "2026-09-01T20:39:49.732Z"
+    },
+    "sweet/1-john-4-4.mp3": {
+      "size": 132954,
+      "mtime": 1788293288285,
+      "kind": "sweet",
+      "filter": "acompressor=threshold=0.125:ratio=2.8:attack=12:release=110:makeup=2.4:knee=2.5:detection=rms,alimiter=limit=0.75:level=false:attack=7:release=80",
+      "at": "2026-09-01T20:39:49.732Z"
+    },
+    "sweet/1-peter-5-7.mp3": {
+      "size": 126057,
+      "mtime": 1788293288261,
+      "kind": "sweet",
+      "filter": "acompressor=threshold=0.125:ratio=2.8:attack=12:release=110:makeup=2.4:knee=2.5:detection=rms,alimiter=limit=0.75:level=false:attack=7:release=80",
+      "at": "2026-09-01T20:39:49.732Z"
+    },
+    "sweet/2-corinthians-10-4.mp3": {
+      "size": 287181,
+      "mtime": 1788293288505,
+      "kind": "sweet",
+      "filter": "acompressor=threshold=0.125:ratio=2.8:attack=12:release=110:makeup=2.4:knee=2.5:detection=rms,alimiter=limit=0.75:level=false:attack=7:release=80",
+      "at": "2026-09-01T20:39:49.732Z"
+    },
+    "sweet/2-corinthians-9-8.mp3": {
+      "size": 284673,
+      "mtime": 1788293288529,
+      "kind": "sweet",
+      "filter": "acompressor=threshold=0.125:ratio=2.8:attack=12:release=110:makeup=2.4:knee=2.5:detection=rms,alimiter=limit=0.75:level=false:attack=7:release=80",
+      "at": "2026-09-01T20:39:49.732Z"
+    },
+    "sweet/2-timothy-1-7.mp3": {
+      "size": 224487,
+      "mtime": 1788293288589,
+      "kind": "sweet",
+      "filter": "acompressor=threshold=0.125:ratio=2.8:attack=12:release=110:makeup=2.4:knee=2.5:detection=rms,alimiter=limit=0.75:level=false:attack=7:release=80",
+      "at": "2026-09-01T20:39:49.732Z"
+    },
+    "sweet/billy-graham-77.mp3": {
+      "size": 271507,
+      "mtime": 1788293288737,
+      "kind": "sweet",
+      "filter": "acompressor=threshold=0.125:ratio=2.8:attack=12:release=110:makeup=2.4:knee=2.5:detection=rms,alimiter=limit=0.75:level=false:attack=7:release=80",
+      "at": "2026-09-01T20:39:49.732Z"
+    },
+    "sweet/billy-graham-78.mp3": {
+      "size": 316020,
+      "mtime": 1788293288913,
+      "kind": "sweet",
+      "filter": "acompressor=threshold=0.125:ratio=2.8:attack=12:release=110:makeup=2.4:knee=2.5:detection=rms,alimiter=limit=0.75:level=false:attack=7:release=80",
+      "at": "2026-09-01T20:39:49.732Z"
+    },
+    "sweet/billy-graham-79.mp3": {
+      "size": 197528,
+      "mtime": 1788293288737,
+      "kind": "sweet",
+      "filter": "acompressor=threshold=0.125:ratio=2.8:attack=12:release=110:makeup=2.4:knee=2.5:detection=rms,alimiter=limit=0.75:level=false:attack=7:release=80",
+      "at": "2026-09-01T20:39:49.732Z"
+    },
+    "sweet/billy-graham-80.mp3": {
+      "size": 175585,
+      "mtime": 1788293288841,
+      "kind": "sweet",
+      "filter": "acompressor=threshold=0.125:ratio=2.8:attack=12:release=110:makeup=2.4:knee=2.5:detection=rms,alimiter=limit=0.75:level=false:attack=7:release=80",
+      "at": "2026-09-01T20:39:49.732Z"
+    },
+    "sweet/c-s-lewis-73.mp3": {
+      "size": 320408,
+      "mtime": 1788293289105,
+      "kind": "sweet",
+      "filter": "acompressor=threshold=0.125:ratio=2.8:attack=12:release=110:makeup=2.4:knee=2.5:detection=rms,alimiter=limit=0.75:level=false:attack=7:release=80",
+      "at": "2026-09-01T20:39:49.732Z"
+    },
+    "sweet/c-s-lewis-74.mp3": {
+      "size": 266492,
+      "mtime": 1788293289041,
+      "kind": "sweet",
+      "filter": "acompressor=threshold=0.125:ratio=2.8:attack=12:release=110:makeup=2.4:knee=2.5:detection=rms,alimiter=limit=0.75:level=false:attack=7:release=80",
+      "at": "2026-09-01T20:39:49.732Z"
+    },
+    "sweet/c-s-lewis-75.mp3": {
+      "size": 153016,
+      "mtime": 1788293288993,
+      "kind": "sweet",
+      "filter": "acompressor=threshold=0.125:ratio=2.8:attack=12:release=110:makeup=2.4:knee=2.5:detection=rms,alimiter=limit=0.75:level=false:attack=7:release=80",
+      "at": "2026-09-01T20:39:49.732Z"
+    },
+    "sweet/c-s-lewis-76.mp3": {
+      "size": 248937,
+      "mtime": 1788293289109,
+      "kind": "sweet",
+      "filter": "acompressor=threshold=0.125:ratio=2.8:attack=12:release=110:makeup=2.4:knee=2.5:detection=rms,alimiter=limit=0.75:level=false:attack=7:release=80",
+      "at": "2026-09-01T20:39:49.732Z"
+    },
+    "sweet/charles-spurgeon-81.mp3": {
+      "size": 153016,
+      "mtime": 1788293289177,
+      "kind": "sweet",
+      "filter": "acompressor=threshold=0.125:ratio=2.8:attack=12:release=110:makeup=2.4:knee=2.5:detection=rms,alimiter=limit=0.75:level=false:attack=7:release=80",
+      "at": "2026-09-01T20:39:49.732Z"
+    },
+    "sweet/charles-spurgeon-82.mp3": {
+      "size": 153016,
+      "mtime": 1788293289213,
+      "kind": "sweet",
+      "filter": "acompressor=threshold=0.125:ratio=2.8:attack=12:release=110:makeup=2.4:knee=2.5:detection=rms,alimiter=limit=0.75:level=false:attack=7:release=80",
+      "at": "2026-09-01T20:39:49.732Z"
+    },
+    "sweet/charles-spurgeon-83.mp3": {
+      "size": 130446,
+      "mtime": 1788293289249,
+      "kind": "sweet",
+      "filter": "acompressor=threshold=0.125:ratio=2.8:attack=12:release=110:makeup=2.4:knee=2.5:detection=rms,alimiter=limit=0.75:level=false:attack=7:release=80",
+      "at": "2026-09-01T20:39:49.732Z"
+    },
+    "sweet/corrie-ten-boom-66.mp3": {
+      "size": 170570,
+      "mtime": 1788293289293,
+      "kind": "sweet",
+      "filter": "acompressor=threshold=0.125:ratio=2.8:attack=12:release=110:makeup=2.4:knee=2.5:detection=rms,alimiter=limit=0.75:level=false:attack=7:release=80",
+      "at": "2026-09-01T20:39:49.732Z"
+    },
+    "sweet/corrie-ten-boom-67.mp3": {
+      "size": 220098,
+      "mtime": 1788293289409,
+      "kind": "sweet",
+      "filter": "acompressor=threshold=0.125:ratio=2.8:attack=12:release=110:makeup=2.4:knee=2.5:detection=rms,alimiter=limit=0.75:level=false:attack=7:release=80",
+      "at": "2026-09-01T20:39:49.732Z"
+    },
+    "sweet/corrie-ten-boom-68.mp3": {
+      "size": 268999,
+      "mtime": 1788293289445,
+      "kind": "sweet",
+      "filter": "acompressor=threshold=0.125:ratio=2.8:attack=12:release=110:makeup=2.4:knee=2.5:detection=rms,alimiter=limit=0.75:level=false:attack=7:release=80",
+      "at": "2026-09-01T20:39:49.732Z"
+    },
+    "sweet/ephesians-6-10-11.mp3": {
+      "size": 297839,
+      "mtime": 1788293289565,
+      "kind": "sweet",
+      "filter": "acompressor=threshold=0.125:ratio=2.8:attack=12:release=110:makeup=2.4:knee=2.5:detection=rms,alimiter=limit=0.75:level=false:attack=7:release=80",
+      "at": "2026-09-01T20:39:49.732Z"
+    },
+    "sweet/ephesians-6-16.mp3": {
+      "size": 195648,
+      "mtime": 1788293289481,
+      "kind": "sweet",
+      "filter": "acompressor=threshold=0.125:ratio=2.8:attack=12:release=110:makeup=2.4:knee=2.5:detection=rms,alimiter=limit=0.75:level=false:attack=7:release=80",
+      "at": "2026-09-01T20:39:49.732Z"
+    },
+    "sweet/isaiah-26-3.mp3": {
+      "size": 208813,
+      "mtime": 1788293289645,
+      "kind": "sweet",
+      "filter": "acompressor=threshold=0.125:ratio=2.8:attack=12:release=110:makeup=2.4:knee=2.5:detection=rms,alimiter=limit=0.75:level=false:attack=7:release=80",
+      "at": "2026-09-01T20:39:49.733Z"
+    },
+    "sweet/isaiah-40-29.mp3": {
+      "size": 130446,
+      "mtime": 1788293289565,
+      "kind": "sweet",
+      "filter": "acompressor=threshold=0.125:ratio=2.8:attack=12:release=110:makeup=2.4:knee=2.5:detection=rms,alimiter=limit=0.75:level=false:attack=7:release=80",
+      "at": "2026-09-01T20:39:49.733Z"
+    },
+    "sweet/isaiah-40-31.mp3": {
+      "size": 322916,
+      "mtime": 1788293289765,
+      "kind": "sweet",
+      "filter": "acompressor=threshold=0.125:ratio=2.8:attack=12:release=110:makeup=2.4:knee=2.5:detection=rms,alimiter=limit=0.75:level=false:attack=7:release=80",
+      "at": "2026-09-01T20:39:49.733Z"
+    },
+    "sweet/isaiah-9-6.mp3": {
+      "size": 429496,
+      "mtime": 1788293289917,
+      "kind": "sweet",
+      "filter": "acompressor=threshold=0.125:ratio=2.8:attack=12:release=110:makeup=2.4:knee=2.5:detection=rms,alimiter=limit=0.75:level=false:attack=7:release=80",
+      "at": "2026-09-01T20:39:49.733Z"
+    },
+    "sweet/james-4-7.mp3": {
+      "size": 166808,
+      "mtime": 1788293289733,
+      "kind": "sweet",
+      "filter": "acompressor=threshold=0.125:ratio=2.8:attack=12:release=110:makeup=2.4:knee=2.5:detection=rms,alimiter=limit=0.75:level=false:attack=7:release=80",
+      "at": "2026-09-01T20:39:49.733Z"
+    },
+    "sweet/james-4-8.mp3": {
+      "size": 104114,
+      "mtime": 1788293289745,
+      "kind": "sweet",
+      "filter": "acompressor=threshold=0.125:ratio=2.8:attack=12:release=110:makeup=2.4:knee=2.5:detection=rms,alimiter=limit=0.75:level=false:attack=7:release=80",
+      "at": "2026-09-01T20:39:49.733Z"
+    },
+    "sweet/john-1-1.mp3": {
+      "size": 168689,
+      "mtime": 1788293289885,
+      "kind": "sweet",
+      "filter": "acompressor=threshold=0.125:ratio=2.8:attack=12:release=110:makeup=2.4:knee=2.5:detection=rms,alimiter=limit=0.75:level=false:attack=7:release=80",
+      "at": "2026-09-01T20:39:49.733Z"
+    },
+    "sweet/john-1-11-12.mp3": {
+      "size": 398776,
+      "mtime": 1788293290141,
+      "kind": "sweet",
+      "filter": "acompressor=threshold=0.125:ratio=2.8:attack=12:release=110:makeup=2.4:knee=2.5:detection=rms,alimiter=limit=0.75:level=false:attack=7:release=80",
+      "at": "2026-09-01T20:39:49.733Z"
+    },
+    "sweet/john-1-14.mp3": {
+      "size": 329185,
+      "mtime": 1788293290117,
+      "kind": "sweet",
+      "filter": "acompressor=threshold=0.125:ratio=2.8:attack=12:release=110:makeup=2.4:knee=2.5:detection=rms,alimiter=limit=0.75:level=false:attack=7:release=80",
+      "at": "2026-09-01T20:39:49.733Z"
+    },
+    "sweet/john-1-14a.mp3": {
+      "size": 114772,
+      "mtime": 1788293289981,
+      "kind": "sweet",
+      "filter": "acompressor=threshold=0.125:ratio=2.8:attack=12:release=110:makeup=2.4:knee=2.5:detection=rms,alimiter=limit=0.75:level=false:attack=7:release=80",
+      "at": "2026-09-01T20:39:49.733Z"
+    },
+    "sweet/john-1-29.mp3": {
+      "size": 268999,
+      "mtime": 1788293290117,
+      "kind": "sweet",
+      "filter": "acompressor=threshold=0.125:ratio=2.8:attack=12:release=110:makeup=2.4:knee=2.5:detection=rms,alimiter=limit=0.75:level=false:attack=7:release=80",
+      "at": "2026-09-01T20:39:49.733Z"
+    },
+    "sweet/john-1-41.mp3": {
+      "size": 177466,
+      "mtime": 1788293290185,
+      "kind": "sweet",
+      "filter": "acompressor=threshold=0.125:ratio=2.8:attack=12:release=110:makeup=2.4:knee=2.5:detection=rms,alimiter=limit=0.75:level=false:attack=7:release=80",
+      "at": "2026-09-01T20:39:49.733Z"
+    },
+    "sweet/john-1-5.mp3": {
+      "size": 148627,
+      "mtime": 1788293290285,
+      "kind": "sweet",
+      "filter": "acompressor=threshold=0.125:ratio=2.8:attack=12:release=110:makeup=2.4:knee=2.5:detection=rms,alimiter=limit=0.75:level=false:attack=7:release=80",
+      "at": "2026-09-01T20:39:49.733Z"
+    },
+    "sweet/john-3-16.mp3": {
+      "size": 304735,
+      "mtime": 1788293290441,
+      "kind": "sweet",
+      "filter": "acompressor=threshold=0.125:ratio=2.8:attack=12:release=110:makeup=2.4:knee=2.5:detection=rms,alimiter=limit=0.75:level=false:attack=7:release=80",
+      "at": "2026-09-01T20:39:49.733Z"
+    },
+    "sweet/john-3-17.mp3": {
+      "size": 181855,
+      "mtime": 1788293290309,
+      "kind": "sweet",
+      "filter": "acompressor=threshold=0.125:ratio=2.8:attack=12:release=110:makeup=2.4:knee=2.5:detection=rms,alimiter=limit=0.75:level=false:attack=7:release=80",
+      "at": "2026-09-01T20:39:49.733Z"
+    },
+    "sweet/joshua-1-9.mp3": {
+      "size": 284673,
+      "mtime": 1788293290433,
+      "kind": "sweet",
+      "filter": "acompressor=threshold=0.125:ratio=2.8:attack=12:release=110:makeup=2.4:knee=2.5:detection=rms,alimiter=limit=0.75:level=false:attack=7:release=80",
+      "at": "2026-09-01T20:39:49.733Z"
+    },
+    "sweet/joyce-meyer-84.mp3": {
+      "size": 148627,
+      "mtime": 1788293290449,
+      "kind": "sweet",
+      "filter": "acompressor=threshold=0.125:ratio=2.8:attack=12:release=110:makeup=2.4:knee=2.5:detection=rms,alimiter=limit=0.75:level=false:attack=7:release=80",
+      "at": "2026-09-01T20:39:49.734Z"
+    },
+    "sweet/joyce-meyer-85.mp3": {
+      "size": 130446,
+      "mtime": 1788293290449,
+      "kind": "sweet",
+      "filter": "acompressor=threshold=0.125:ratio=2.8:attack=12:release=110:makeup=2.4:knee=2.5:detection=rms,alimiter=limit=0.75:level=false:attack=7:release=80",
+      "at": "2026-09-01T20:39:49.734Z"
+    },
+    "sweet/joyce-meyer-86.mp3": {
+      "size": 188751,
+      "mtime": 1788293290605,
+      "kind": "sweet",
+      "filter": "acompressor=threshold=0.125:ratio=2.8:attack=12:release=110:makeup=2.4:knee=2.5:detection=rms,alimiter=limit=0.75:level=false:attack=7:release=80",
+      "at": "2026-09-01T20:39:49.734Z"
+    },
+    "sweet/luke-12-24.mp3": {
+      "size": 358025,
+      "mtime": 1788293290769,
+      "kind": "sweet",
+      "filter": "acompressor=threshold=0.125:ratio=2.8:attack=12:release=110:makeup=2.4:knee=2.5:detection=rms,alimiter=limit=0.75:level=false:attack=7:release=80",
+      "at": "2026-09-01T20:39:49.734Z"
+    },
+    "sweet/luke-2-11.mp3": {
+      "size": 213202,
+      "mtime": 1788293290653,
+      "kind": "sweet",
+      "filter": "acompressor=threshold=0.125:ratio=2.8:attack=12:release=110:makeup=2.4:knee=2.5:detection=rms,alimiter=limit=0.75:level=false:attack=7:release=80",
+      "at": "2026-09-01T20:39:49.734Z"
+    },
+    "sweet/luke-2-14.mp3": {
+      "size": 200036,
+      "mtime": 1788293290641,
+      "kind": "sweet",
+      "filter": "acompressor=threshold=0.125:ratio=2.8:attack=12:release=110:makeup=2.4:knee=2.5:detection=rms,alimiter=limit=0.75:level=false:attack=7:release=80",
+      "at": "2026-09-01T20:39:49.734Z"
+    },
+    "sweet/luke-2-19.mp3": {
+      "size": 130446,
+      "mtime": 1788293290741,
+      "kind": "sweet",
+      "filter": "acompressor=threshold=0.125:ratio=2.8:attack=12:release=110:makeup=2.4:knee=2.5:detection=rms,alimiter=limit=0.75:level=false:attack=7:release=80",
+      "at": "2026-09-01T20:39:49.734Z"
+    },
+    "sweet/luke-2-52.mp3": {
+      "size": 154896,
+      "mtime": 1788293290829,
+      "kind": "sweet",
+      "filter": "acompressor=threshold=0.125:ratio=2.8:attack=12:release=110:makeup=2.4:knee=2.5:detection=rms,alimiter=limit=0.75:level=false:attack=7:release=80",
+      "at": "2026-09-01T20:39:49.734Z"
+    },
+    "sweet/luke-2-8-9.mp3": {
+      "size": 376206,
+      "mtime": 1788293291005,
+      "kind": "sweet",
+      "filter": "acompressor=threshold=0.125:ratio=2.8:attack=12:release=110:makeup=2.4:knee=2.5:detection=rms,alimiter=limit=0.75:level=false:attack=7:release=80",
+      "at": "2026-09-01T20:39:49.734Z"
+    },
+    "sweet/luke-24-6.mp3": {
+      "size": 242041,
+      "mtime": 1788293290997,
+      "kind": "sweet",
+      "filter": "acompressor=threshold=0.125:ratio=2.8:attack=12:release=110:makeup=2.4:knee=2.5:detection=rms,alimiter=limit=0.75:level=false:attack=7:release=80",
+      "at": "2026-09-01T20:39:49.734Z"
+    },
+    "sweet/martin-luther-king-jr-92.mp3": {
+      "size": 154896,
+      "mtime": 1788293290937,
+      "kind": "sweet",
+      "filter": "acompressor=threshold=0.125:ratio=2.8:attack=12:release=110:makeup=2.4:knee=2.5:detection=rms,alimiter=limit=0.75:level=false:attack=7:release=80",
+      "at": "2026-09-01T20:39:49.734Z"
+    },
+    "sweet/martin-luther-king-jr-93.mp3": {
+      "size": 181855,
+      "mtime": 1788293291033,
+      "kind": "sweet",
+      "filter": "acompressor=threshold=0.125:ratio=2.8:attack=12:release=110:makeup=2.4:knee=2.5:detection=rms,alimiter=limit=0.75:level=false:attack=7:release=80",
+      "at": "2026-09-01T20:39:49.734Z"
+    },
+    "sweet/matthew-1-21.mp3": {
+      "size": 228875,
+      "mtime": 1788293291149,
+      "kind": "sweet",
+      "filter": "acompressor=threshold=0.125:ratio=2.8:attack=12:release=110:makeup=2.4:knee=2.5:detection=rms,alimiter=limit=0.75:level=false:attack=7:release=80",
+      "at": "2026-09-01T20:39:49.734Z"
+    },
+    "sweet/matthew-1-23.mp3": {
+      "size": 240160,
+      "mtime": 1788293291229,
+      "kind": "sweet",
+      "filter": "acompressor=threshold=0.125:ratio=2.8:attack=12:release=110:makeup=2.4:knee=2.5:detection=rms,alimiter=limit=0.75:level=false:attack=7:release=80",
+      "at": "2026-09-01T20:39:49.734Z"
+    },
+    "sweet/matthew-5-8.mp3": {
+      "size": 105995,
+      "mtime": 1788293291133,
+      "kind": "sweet",
+      "filter": "acompressor=threshold=0.125:ratio=2.8:attack=12:release=110:makeup=2.4:knee=2.5:detection=rms,alimiter=limit=0.75:level=false:attack=7:release=80",
+      "at": "2026-09-01T20:39:49.734Z"
+    },
+    "sweet/matthew-9-36.mp3": {
+      "size": 251445,
+      "mtime": 1788293291277,
+      "kind": "sweet",
+      "filter": "acompressor=threshold=0.125:ratio=2.8:attack=12:release=110:makeup=2.4:knee=2.5:detection=rms,alimiter=limit=0.75:level=false:attack=7:release=80",
+      "at": "2026-09-01T20:39:49.734Z"
+    },
+    "sweet/max-lucado-87.mp3": {
+      "size": 337963,
+      "mtime": 1788293291445,
+      "kind": "sweet",
+      "filter": "acompressor=threshold=0.125:ratio=2.8:attack=12:release=110:makeup=2.4:knee=2.5:detection=rms,alimiter=limit=0.75:level=false:attack=7:release=80",
+      "at": "2026-09-01T20:39:49.734Z"
+    },
+    "sweet/max-lucado-88.mp3": {
+      "size": 153016,
+      "mtime": 1788293291309,
+      "kind": "sweet",
+      "filter": "acompressor=threshold=0.125:ratio=2.8:attack=12:release=110:makeup=2.4:knee=2.5:detection=rms,alimiter=limit=0.75:level=false:attack=7:release=80",
+      "at": "2026-09-01T20:39:49.734Z"
+    },
+    "sweet/max-lucado-89.mp3": {
+      "size": 132954,
+      "mtime": 1788293291381,
+      "kind": "sweet",
+      "filter": "acompressor=threshold=0.125:ratio=2.8:attack=12:release=110:makeup=2.4:knee=2.5:detection=rms,alimiter=limit=0.75:level=false:attack=7:release=80",
+      "at": "2026-09-01T20:39:49.734Z"
+    },
+    "sweet/micah-5-2.mp3": {
+      "size": 364921,
+      "mtime": 1788293291641,
+      "kind": "sweet",
+      "filter": "acompressor=threshold=0.125:ratio=2.8:attack=12:release=110:makeup=2.4:knee=2.5:detection=rms,alimiter=limit=0.75:level=false:attack=7:release=80",
+      "at": "2026-09-01T20:39:49.734Z"
+    },
+    "sweet/nehemiah-8-10.mp3": {
+      "size": 141731,
+      "mtime": 1788293291473,
+      "kind": "sweet",
+      "filter": "acompressor=threshold=0.125:ratio=2.8:attack=12:release=110:makeup=2.4:knee=2.5:detection=rms,alimiter=limit=0.75:level=false:attack=7:release=80",
+      "at": "2026-09-01T20:39:49.734Z"
+    },
+    "sweet/nick-vujicic-69.mp3": {
+      "size": 157404,
+      "mtime": 1788293291561,
+      "kind": "sweet",
+      "filter": "acompressor=threshold=0.125:ratio=2.8:attack=12:release=110:makeup=2.4:knee=2.5:detection=rms,alimiter=limit=0.75:level=false:attack=7:release=80",
+      "at": "2026-09-01T20:39:49.734Z"
+    },
+    "sweet/nick-vujicic-70.mp3": {
+      "size": 181855,
+      "mtime": 1788293291629,
+      "kind": "sweet",
+      "filter": "acompressor=threshold=0.125:ratio=2.8:attack=12:release=110:makeup=2.4:knee=2.5:detection=rms,alimiter=limit=0.75:level=false:attack=7:release=80",
+      "at": "2026-09-01T20:39:49.734Z"
+    },
+    "sweet/nick-vujicic-71.mp3": {
+      "size": 134834,
+      "mtime": 1788293291609,
+      "kind": "sweet",
+      "filter": "acompressor=threshold=0.125:ratio=2.8:attack=12:release=110:makeup=2.4:knee=2.5:detection=rms,alimiter=limit=0.75:level=false:attack=7:release=80",
+      "at": "2026-09-01T20:39:49.734Z"
+    },
+    "sweet/nick-vujicic-72.mp3": {
+      "size": 190632,
+      "mtime": 1788293291765,
+      "kind": "sweet",
+      "filter": "acompressor=threshold=0.125:ratio=2.8:attack=12:release=110:makeup=2.4:knee=2.5:detection=rms,alimiter=limit=0.75:level=false:attack=7:release=80",
+      "at": "2026-09-01T20:39:49.734Z"
+    },
+    "sweet/numbers-6-24-26.mp3": {
+      "size": 324797,
+      "mtime": 1788293291949,
+      "kind": "sweet",
+      "filter": "acompressor=threshold=0.125:ratio=2.8:attack=12:release=110:makeup=2.4:knee=2.5:detection=rms,alimiter=limit=0.75:level=false:attack=7:release=80",
+      "at": "2026-09-01T20:39:49.734Z"
+    },
+    "sweet/oswald-chambers-97.mp3": {
+      "size": 181855,
+      "mtime": 1788293291837,
+      "kind": "sweet",
+      "filter": "acompressor=threshold=0.125:ratio=2.8:attack=12:release=110:makeup=2.4:knee=2.5:detection=rms,alimiter=limit=0.75:level=false:attack=7:release=80",
+      "at": "2026-09-01T20:39:49.734Z"
+    },
+    "sweet/oswald-chambers-98.mp3": {
+      "size": 208813,
+      "mtime": 1788293291757,
+      "kind": "sweet",
+      "filter": "acompressor=threshold=0.125:ratio=2.8:attack=12:release=110:makeup=2.4:knee=2.5:detection=rms,alimiter=limit=0.75:level=false:attack=7:release=80",
+      "at": "2026-09-01T20:39:49.734Z"
+    },
+    "sweet/philippians-4-13.mp3": {
+      "size": 114772,
+      "mtime": 1788293291837,
+      "kind": "sweet",
+      "filter": "acompressor=threshold=0.125:ratio=2.8:attack=12:release=110:makeup=2.4:knee=2.5:detection=rms,alimiter=limit=0.75:level=false:attack=7:release=80",
+      "at": "2026-09-01T20:39:49.734Z"
+    },
+    "sweet/philippians-4-19.mp3": {
+      "size": 191259,
+      "mtime": 1788293291981,
+      "kind": "sweet",
+      "filter": "acompressor=threshold=0.125:ratio=2.8:attack=12:release=110:makeup=2.4:knee=2.5:detection=rms,alimiter=limit=0.75:level=false:attack=7:release=80",
+      "at": "2026-09-01T20:39:49.734Z"
+    },
+    "sweet/philippians-4-6-7.mp3": {
+      "size": 494697,
+      "mtime": 1788293292241,
+      "kind": "sweet",
+      "filter": "acompressor=threshold=0.125:ratio=2.8:attack=12:release=110:makeup=2.4:knee=2.5:detection=rms,alimiter=limit=0.75:level=false:attack=7:release=80",
+      "at": "2026-09-01T20:39:49.734Z"
+    },
+    "sweet/proverbs-10-22.mp3": {
+      "size": 144239,
+      "mtime": 1788293292013,
+      "kind": "sweet",
+      "filter": "acompressor=threshold=0.125:ratio=2.8:attack=12:release=110:makeup=2.4:knee=2.5:detection=rms,alimiter=limit=0.75:level=false:attack=7:release=80",
+      "at": "2026-09-01T20:39:49.734Z"
+    },
+    "sweet/proverbs-18-10.mp3": {
+      "size": 174959,
+      "mtime": 1788293292157,
+      "kind": "sweet",
+      "filter": "acompressor=threshold=0.125:ratio=2.8:attack=12:release=110:makeup=2.4:knee=2.5:detection=rms,alimiter=limit=0.75:level=false:attack=7:release=80",
+      "at": "2026-09-01T20:39:49.734Z"
+    },
+    "sweet/proverbs-3-5-6.mp3": {
+      "size": 344859,
+      "mtime": 1788293292253,
+      "kind": "sweet",
+      "filter": "acompressor=threshold=0.125:ratio=2.8:attack=12:release=110:makeup=2.4:knee=2.5:detection=rms,alimiter=limit=0.75:level=false:attack=7:release=80",
+      "at": "2026-09-01T20:39:49.734Z"
+    },
+    "sweet/psalm-121-1-2.mp3": {
+      "size": 277776,
+      "mtime": 1788293292249,
+      "kind": "sweet",
+      "filter": "acompressor=threshold=0.125:ratio=2.8:attack=12:release=110:makeup=2.4:knee=2.5:detection=rms,alimiter=limit=0.75:level=false:attack=7:release=80",
+      "at": "2026-09-01T20:39:49.734Z"
+    },
+    "sweet/psalm-147-3.mp3": {
+      "size": 119161,
+      "mtime": 1788293292289,
+      "kind": "sweet",
+      "filter": "acompressor=threshold=0.125:ratio=2.8:attack=12:release=110:makeup=2.4:knee=2.5:detection=rms,alimiter=limit=0.75:level=false:attack=7:release=80",
+      "at": "2026-09-01T20:39:49.734Z"
+    },
+    "sweet/psalm-18-2.mp3": {
+      "size": 358025,
+      "mtime": 1788293292641,
+      "kind": "sweet",
+      "filter": "acompressor=threshold=0.125:ratio=2.8:attack=12:release=110:makeup=2.4:knee=2.5:detection=rms,alimiter=limit=0.75:level=false:attack=7:release=80",
+      "at": "2026-09-01T20:39:49.734Z"
+    },
+    "sweet/psalm-23-1.mp3": {
+      "size": 112892,
+      "mtime": 1788293292349,
+      "kind": "sweet",
+      "filter": "acompressor=threshold=0.125:ratio=2.8:attack=12:release=110:makeup=2.4:knee=2.5:detection=rms,alimiter=limit=0.75:level=false:attack=7:release=80",
+      "at": "2026-09-01T20:39:49.734Z"
+    },
+    "sweet/psalm-23-4.mp3": {
+      "size": 282165,
+      "mtime": 1788293292597,
+      "kind": "sweet",
+      "filter": "acompressor=threshold=0.125:ratio=2.8:attack=12:release=110:makeup=2.4:knee=2.5:detection=rms,alimiter=limit=0.75:level=false:attack=7:release=80",
+      "at": "2026-09-01T20:39:49.734Z"
+    },
+    "sweet/psalm-28-7.mp3": {
+      "size": 186243,
+      "mtime": 1788293292533,
+      "kind": "sweet",
+      "filter": "acompressor=threshold=0.125:ratio=2.8:attack=12:release=110:makeup=2.4:knee=2.5:detection=rms,alimiter=limit=0.75:level=false:attack=7:release=80",
+      "at": "2026-09-01T20:39:49.734Z"
+    },
+    "sweet/psalm-30-5.mp3": {
+      "size": 132954,
+      "mtime": 1788293292425,
+      "kind": "sweet",
+      "filter": "acompressor=threshold=0.125:ratio=2.8:attack=12:release=110:makeup=2.4:knee=2.5:detection=rms,alimiter=limit=0.75:level=false:attack=7:release=80",
+      "at": "2026-09-01T20:39:49.734Z"
+    },
+    "sweet/psalm-34-18.mp3": {
+      "size": 153016,
+      "mtime": 1788293292505,
+      "kind": "sweet",
+      "filter": "acompressor=threshold=0.125:ratio=2.8:attack=12:release=110:makeup=2.4:knee=2.5:detection=rms,alimiter=limit=0.75:level=false:attack=7:release=80",
+      "at": "2026-09-01T20:39:49.734Z"
+    },
+    "sweet/psalm-34-9-10.mp3": {
+      "size": 282165,
+      "mtime": 1788293292761,
+      "kind": "sweet",
+      "filter": "acompressor=threshold=0.125:ratio=2.8:attack=12:release=110:makeup=2.4:knee=2.5:detection=rms,alimiter=limit=0.75:level=false:attack=7:release=80",
+      "at": "2026-09-01T20:39:49.734Z"
+    },
+    "sweet/psalm-37-25.mp3": {
+      "size": 237652,
+      "mtime": 1788293292781,
+      "kind": "sweet",
+      "filter": "acompressor=threshold=0.125:ratio=2.8:attack=12:release=110:makeup=2.4:knee=2.5:detection=rms,alimiter=limit=0.75:level=false:attack=7:release=80",
+      "at": "2026-09-01T20:39:49.734Z"
+    },
+    "sweet/psalm-46-1.mp3": {
+      "size": 153016,
+      "mtime": 1788293292761,
+      "kind": "sweet",
+      "filter": "acompressor=threshold=0.125:ratio=2.8:attack=12:release=110:makeup=2.4:knee=2.5:detection=rms,alimiter=limit=0.75:level=false:attack=7:release=80",
+      "at": "2026-09-01T20:39:49.734Z"
+    },
+    "sweet/psalm-51-10.mp3": {
+      "size": 181855,
+      "mtime": 1788293292849,
+      "kind": "sweet",
+      "filter": "acompressor=threshold=0.125:ratio=2.8:attack=12:release=110:makeup=2.4:knee=2.5:detection=rms,alimiter=limit=0.75:level=false:attack=7:release=80",
+      "at": "2026-09-01T20:39:49.734Z"
+    },
+    "sweet/psalm-55-22.mp3": {
+      "size": 210694,
+      "mtime": 1788293292901,
+      "kind": "sweet",
+      "filter": "acompressor=threshold=0.125:ratio=2.8:attack=12:release=110:makeup=2.4:knee=2.5:detection=rms,alimiter=limit=0.75:level=false:attack=7:release=80",
+      "at": "2026-09-01T20:39:49.734Z"
+    },
+    "sweet/psalm-62-5-6.mp3": {
+      "size": 347367,
+      "mtime": 1788293293105,
+      "kind": "sweet",
+      "filter": "acompressor=threshold=0.125:ratio=2.8:attack=12:release=110:makeup=2.4:knee=2.5:detection=rms,alimiter=limit=0.75:level=false:attack=7:release=80",
+      "at": "2026-09-01T20:39:49.734Z"
+    },
+    "sweet/psalm-73-26.mp3": {
+      "size": 195648,
+      "mtime": 1788293293001,
+      "kind": "sweet",
+      "filter": "acompressor=threshold=0.125:ratio=2.8:attack=12:release=110:makeup=2.4:knee=2.5:detection=rms,alimiter=limit=0.75:level=false:attack=7:release=80",
+      "at": "2026-09-01T20:39:49.734Z"
+    },
+    "sweet/romans-10-9.mp3": {
+      "size": 226994,
+      "mtime": 1788293293081,
+      "kind": "sweet",
+      "filter": "acompressor=threshold=0.125:ratio=2.8:attack=12:release=110:makeup=2.4:knee=2.5:detection=rms,alimiter=limit=0.75:level=false:attack=7:release=80",
+      "at": "2026-09-01T20:39:49.734Z"
+    },
+    "sweet/romans-15-13.mp3": {
+      "size": 295958,
+      "mtime": 1788293293185,
+      "kind": "sweet",
+      "filter": "acompressor=threshold=0.125:ratio=2.8:attack=12:release=110:makeup=2.4:knee=2.5:detection=rms,alimiter=limit=0.75:level=false:attack=7:release=80",
+      "at": "2026-09-01T20:39:49.734Z"
+    },
+    "sweet/romans-8-28.mp3": {
+      "size": 150508,
+      "mtime": 1788293293137,
+      "kind": "sweet",
+      "filter": "acompressor=threshold=0.125:ratio=2.8:attack=12:release=110:makeup=2.4:knee=2.5:detection=rms,alimiter=limit=0.75:level=false:attack=7:release=80",
+      "at": "2026-09-01T20:39:49.734Z"
+    },
+    "sweet/romans-8-31.mp3": {
+      "size": 99099,
+      "mtime": 1788293293213,
+      "kind": "sweet",
+      "filter": "acompressor=threshold=0.125:ratio=2.8:attack=12:release=110:makeup=2.4:knee=2.5:detection=rms,alimiter=limit=0.75:level=false:attack=7:release=80",
+      "at": "2026-09-01T20:39:49.734Z"
+    },
+    "sweet/romans-8-38-39.mp3": {
+      "size": 349248,
+      "mtime": 1788293293453,
+      "kind": "sweet",
+      "filter": "acompressor=threshold=0.125:ratio=2.8:attack=12:release=110:makeup=2.4:knee=2.5:detection=rms,alimiter=limit=0.75:level=false:attack=7:release=80",
+      "at": "2026-09-01T20:39:49.734Z"
+    },
+    "sweet/st-augustine-90.mp3": {
+      "size": 139850,
+      "mtime": 1788293293309,
+      "kind": "sweet",
+      "filter": "acompressor=threshold=0.125:ratio=2.8:attack=12:release=110:makeup=2.4:knee=2.5:detection=rms,alimiter=limit=0.75:level=false:attack=7:release=80",
+      "at": "2026-09-01T20:39:49.735Z"
+    },
+    "sweet/st-augustine-91.mp3": {
+      "size": 210694,
+      "mtime": 1788293293357,
+      "kind": "sweet",
+      "filter": "acompressor=threshold=0.125:ratio=2.8:attack=12:release=110:makeup=2.4:knee=2.5:detection=rms,alimiter=limit=0.75:level=false:attack=7:release=80",
+      "at": "2026-09-01T20:39:49.735Z"
+    },
+    "sweet/tim-tebow-61.mp3": {
+      "size": 260222,
+      "mtime": 1788293293457,
+      "kind": "sweet",
+      "filter": "acompressor=threshold=0.125:ratio=2.8:attack=12:release=110:makeup=2.4:knee=2.5:detection=rms,alimiter=limit=0.75:level=false:attack=7:release=80",
+      "at": "2026-09-01T20:39:49.735Z"
+    },
+    "sweet/tim-tebow-62.mp3": {
+      "size": 135461,
+      "mtime": 1788293293465,
+      "kind": "sweet",
+      "filter": "acompressor=threshold=0.125:ratio=2.8:attack=12:release=110:makeup=2.4:knee=2.5:detection=rms,alimiter=limit=0.75:level=false:attack=7:release=80",
+      "at": "2026-09-01T20:39:49.735Z"
+    },
+    "sweet/tim-tebow-63.mp3": {
+      "size": 195648,
+      "mtime": 1788293293585,
+      "kind": "sweet",
+      "filter": "acompressor=threshold=0.125:ratio=2.8:attack=12:release=110:makeup=2.4:knee=2.5:detection=rms,alimiter=limit=0.75:level=false:attack=7:release=80",
+      "at": "2026-09-01T20:39:49.735Z"
+    },
+    "sweet/tim-tebow-64.mp3": {
+      "size": 255834,
+      "mtime": 1788293293637,
+      "kind": "sweet",
+      "filter": "acompressor=threshold=0.125:ratio=2.8:attack=12:release=110:makeup=2.4:knee=2.5:detection=rms,alimiter=limit=0.75:level=false:attack=7:release=80",
+      "at": "2026-09-01T20:39:49.735Z"
+    },
+    "sweet/tim-tebow-65.mp3": {
+      "size": 181855,
+      "mtime": 1788293293649,
+      "kind": "sweet",
+      "filter": "acompressor=threshold=0.125:ratio=2.8:attack=12:release=110:makeup=2.4:knee=2.5:detection=rms,alimiter=limit=0.75:level=false:attack=7:release=80",
+      "at": "2026-09-01T20:39:49.735Z"
+    },
+    "sweet/tony-evans-94.mp3": {
+      "size": 201917,
+      "mtime": 1788293293693,
+      "kind": "sweet",
+      "filter": "acompressor=threshold=0.125:ratio=2.8:attack=12:release=110:makeup=2.4:knee=2.5:detection=rms,alimiter=limit=0.75:level=false:attack=7:release=80",
+      "at": "2026-09-01T20:39:49.735Z"
+    },
+    "sweet/tony-evans-95.mp3": {
+      "size": 161793,
+      "mtime": 1788293293745,
+      "kind": "sweet",
+      "filter": "acompressor=threshold=0.125:ratio=2.8:attack=12:release=110:makeup=2.4:knee=2.5:detection=rms,alimiter=limit=0.75:level=false:attack=7:release=80",
+      "at": "2026-09-01T20:39:49.735Z"
+    },
+    "sweet/tony-evans-96.mp3": {
+      "size": 197528,
+      "mtime": 1788293293825,
+      "kind": "sweet",
+      "filter": "acompressor=threshold=0.125:ratio=2.8:attack=12:release=110:makeup=2.4:knee=2.5:detection=rms,alimiter=limit=0.75:level=false:attack=7:release=80",
+      "at": "2026-09-01T20:39:49.735Z"
+    },
+    "sweet/zephaniah-3-17.mp3": {
+      "size": 322289,
+      "mtime": 1788293293945,
+      "kind": "sweet",
+      "filter": "acompressor=threshold=0.125:ratio=2.8:attack=12:release=110:makeup=2.4:knee=2.5:detection=rms,alimiter=limit=0.75:level=false:attack=7:release=80",
+      "at": "2026-09-01T20:39:49.735Z"
+    },
+    "god/2cor-12-9.mp3": {
+      "size": 202544,
+      "mtime": 1788293293889,
+      "kind": "god",
+      "filter": "acompressor=threshold=0.112:ratio=4:attack=8:release=90:makeup=2.6:knee=2.2:detection=rms,alimiter=limit=0.75:level=false:attack=7:release=80",
+      "at": "2026-09-01T20:39:49.735Z"
+    },
+    "god/acts-1-8.mp3": {
+      "size": 399403,
+      "mtime": 1788293294129,
+      "kind": "god",
+      "filter": "acompressor=threshold=0.112:ratio=4:attack=8:release=90:makeup=2.6:knee=2.2:detection=rms,alimiter=limit=0.75:level=false:attack=7:release=80",
+      "at": "2026-09-01T20:39:49.735Z"
+    },
+    "god/exodus-3-14.mp3": {
+      "size": 269626,
+      "mtime": 1788293294033,
+      "kind": "god",
+      "filter": "acompressor=threshold=0.112:ratio=4:attack=8:release=90:makeup=2.6:knee=2.2:detection=rms,alimiter=limit=0.75:level=false:attack=7:release=80",
+      "at": "2026-09-01T20:39:49.735Z"
+    },
+    "god/genesis-1-3.mp3": {
+      "size": 156777,
+      "mtime": 1788293294061,
+      "kind": "god",
+      "filter": "acompressor=threshold=0.112:ratio=4:attack=8:release=90:makeup=2.6:knee=2.2:detection=rms,alimiter=limit=0.75:level=false:attack=7:release=80",
+      "at": "2026-09-01T20:39:49.735Z"
+    },
+    "god/isaiah-41-10.mp3": {
+      "size": 394387,
+      "mtime": 1788293294377,
+      "kind": "god",
+      "filter": "acompressor=threshold=0.112:ratio=4:attack=8:release=90:makeup=2.6:knee=2.2:detection=rms,alimiter=limit=0.75:level=false:attack=7:release=80",
+      "at": "2026-09-01T20:39:49.735Z"
+    },
+    "god/jeremiah-29-11.mp3": {
+      "size": 315393,
+      "mtime": 1788293294225,
+      "kind": "god",
+      "filter": "acompressor=threshold=0.112:ratio=4:attack=8:release=90:makeup=2.6:knee=2.2:detection=rms,alimiter=limit=0.75:level=false:attack=7:release=80",
+      "at": "2026-09-01T20:39:49.735Z"
+    },
+    "god/john-1-39.mp3": {
+      "size": 99726,
+      "mtime": 1788293294185,
+      "kind": "god",
+      "filter": "acompressor=threshold=0.112:ratio=4:attack=8:release=90:makeup=2.6:knee=2.2:detection=rms,alimiter=limit=0.75:level=false:attack=7:release=80",
+      "at": "2026-09-01T20:39:49.735Z"
+    },
+    "god/john-1-42.mp3": {
+      "size": 289061,
+      "mtime": 1788293294437,
+      "kind": "god",
+      "filter": "acompressor=threshold=0.112:ratio=4:attack=8:release=90:makeup=2.6:knee=2.2:detection=rms,alimiter=limit=0.75:level=false:attack=7:release=80",
+      "at": "2026-09-01T20:39:49.735Z"
+    },
+    "god/john-10-10.mp3": {
+      "size": 181228,
+      "mtime": 1788293294393,
+      "kind": "god",
+      "filter": "acompressor=threshold=0.112:ratio=4:attack=8:release=90:makeup=2.6:knee=2.2:detection=rms,alimiter=limit=0.75:level=false:attack=7:release=80",
+      "at": "2026-09-01T20:39:49.735Z"
+    },
+    "god/john-10-11.mp3": {
+      "size": 195648,
+      "mtime": 1788293294321,
+      "kind": "god",
+      "filter": "acompressor=threshold=0.112:ratio=4:attack=8:release=90:makeup=2.6:knee=2.2:detection=rms,alimiter=limit=0.75:level=false:attack=7:release=80",
+      "at": "2026-09-01T20:39:49.735Z"
+    },
+    "god/john-11-25.mp3": {
+      "size": 255207,
+      "mtime": 1788293294529,
+      "kind": "god",
+      "filter": "acompressor=threshold=0.112:ratio=4:attack=8:release=90:makeup=2.6:knee=2.2:detection=rms,alimiter=limit=0.75:level=false:attack=7:release=80",
+      "at": "2026-09-01T20:39:49.735Z"
+    },
+    "god/john-14-27.mp3": {
+      "size": 317901,
+      "mtime": 1788293294657,
+      "kind": "god",
+      "filter": "acompressor=threshold=0.112:ratio=4:attack=8:release=90:makeup=2.6:knee=2.2:detection=rms,alimiter=limit=0.75:level=false:attack=7:release=80",
+      "at": "2026-09-01T20:39:49.735Z"
+    },
+    "god/john-14-6.mp3": {
+      "size": 243295,
+      "mtime": 1788293294649,
+      "kind": "god",
+      "filter": "acompressor=threshold=0.112:ratio=4:attack=8:release=90:makeup=2.6:knee=2.2:detection=rms,alimiter=limit=0.75:level=false:attack=7:release=80",
+      "at": "2026-09-01T20:39:49.735Z"
+    },
+    "god/john-15-13.mp3": {
+      "size": 211948,
+      "mtime": 1788293294581,
+      "kind": "god",
+      "filter": "acompressor=threshold=0.112:ratio=4:attack=8:release=90:makeup=2.6:knee=2.2:detection=rms,alimiter=limit=0.75:level=false:attack=7:release=80",
+      "at": "2026-09-01T20:39:49.735Z"
+    },
+    "god/john-15-5.mp3": {
+      "size": 375579,
+      "mtime": 1788293294909,
+      "kind": "god",
+      "filter": "acompressor=threshold=0.112:ratio=4:attack=8:release=90:makeup=2.6:knee=2.2:detection=rms,alimiter=limit=0.75:level=false:attack=7:release=80",
+      "at": "2026-09-01T20:39:49.735Z"
+    },
+    "god/john-16-33.mp3": {
+      "size": 221979,
+      "mtime": 1788293294829,
+      "kind": "god",
+      "filter": "acompressor=threshold=0.112:ratio=4:attack=8:release=90:makeup=2.6:knee=2.2:detection=rms,alimiter=limit=0.75:level=false:attack=7:release=80",
+      "at": "2026-09-01T20:39:49.735Z"
+    },
+    "god/john-3-3.mp3": {
+      "size": 228875,
+      "mtime": 1788293294861,
+      "kind": "god",
+      "filter": "acompressor=threshold=0.112:ratio=4:attack=8:release=90:makeup=2.6:knee=2.2:detection=rms,alimiter=limit=0.75:level=false:attack=7:release=80",
+      "at": "2026-09-01T20:39:49.735Z"
+    },
+    "god/john-6-35.mp3": {
+      "size": 262730,
+      "mtime": 1788293294797,
+      "kind": "god",
+      "filter": "acompressor=threshold=0.112:ratio=4:attack=8:release=90:makeup=2.6:knee=2.2:detection=rms,alimiter=limit=0.75:level=false:attack=7:release=80",
+      "at": "2026-09-01T20:39:49.735Z"
+    },
+    "god/john-8-12.mp3": {
+      "size": 267745,
+      "mtime": 1788293295033,
+      "kind": "god",
+      "filter": "acompressor=threshold=0.112:ratio=4:attack=8:release=90:makeup=2.6:knee=2.2:detection=rms,alimiter=limit=0.75:level=false:attack=7:release=80",
+      "at": "2026-09-01T20:39:49.735Z"
+    },
+    "god/john-8-58.mp3": {
+      "size": 183736,
+      "mtime": 1788293295005,
+      "kind": "god",
+      "filter": "acompressor=threshold=0.112:ratio=4:attack=8:release=90:makeup=2.6:knee=2.2:detection=rms,alimiter=limit=0.75:level=false:attack=7:release=80",
+      "at": "2026-09-01T20:39:49.735Z"
+    },
+    "god/luke-19-10.mp3": {
+      "size": 171197,
+      "mtime": 1788293295021,
+      "kind": "god",
+      "filter": "acompressor=threshold=0.112:ratio=4:attack=8:release=90:makeup=2.6:knee=2.2:detection=rms,alimiter=limit=0.75:level=false:attack=7:release=80",
+      "at": "2026-09-01T20:39:49.735Z"
+    },
+    "god/luke-23-34.mp3": {
+      "size": 183736,
+      "mtime": 1788293295117,
+      "kind": "god",
+      "filter": "acompressor=threshold=0.112:ratio=4:attack=8:release=90:makeup=2.6:knee=2.2:detection=rms,alimiter=limit=0.75:level=false:attack=7:release=80",
+      "at": "2026-09-01T20:39:49.735Z"
+    },
+    "god/luke-4-18.mp3": {
+      "size": 425734,
+      "mtime": 1788293295389,
+      "kind": "god",
+      "filter": "acompressor=threshold=0.112:ratio=4:attack=8:release=90:makeup=2.6:knee=2.2:detection=rms,alimiter=limit=0.75:level=false:attack=7:release=80",
+      "at": "2026-09-01T20:39:49.735Z"
+    },
+    "god/luke-5-32.mp3": {
+      "size": 149881,
+      "mtime": 1788293295189,
+      "kind": "god",
+      "filter": "acompressor=threshold=0.112:ratio=4:attack=8:release=90:makeup=2.6:knee=2.2:detection=rms,alimiter=limit=0.75:level=false:attack=7:release=80",
+      "at": "2026-09-01T20:39:49.735Z"
+    },
+    "god/luke-6-31.mp3": {
+      "size": 149881,
+      "mtime": 1788293295117,
+      "kind": "god",
+      "filter": "acompressor=threshold=0.112:ratio=4:attack=8:release=90:makeup=2.6:knee=2.2:detection=rms,alimiter=limit=0.75:level=false:attack=7:release=80",
+      "at": "2026-09-01T20:39:49.735Z"
+    },
+    "god/mark-1-11.mp3": {
+      "size": 281538,
+      "mtime": 1788293295345,
+      "kind": "god",
+      "filter": "acompressor=threshold=0.112:ratio=4:attack=8:release=90:makeup=2.6:knee=2.2:detection=rms,alimiter=limit=0.75:level=false:attack=7:release=80",
+      "at": "2026-09-01T20:39:49.735Z"
+    },
+    "god/mark-1-14-15.mp3": {
+      "size": 406926,
+      "mtime": 1788293295533,
+      "kind": "god",
+      "filter": "acompressor=threshold=0.112:ratio=4:attack=8:release=90:makeup=2.6:knee=2.2:detection=rms,alimiter=limit=0.75:level=false:attack=7:release=80",
+      "at": "2026-09-01T20:39:49.735Z"
+    },
+    "god/mark-10-27.mp3": {
+      "size": 228875,
+      "mtime": 1788293295417,
+      "kind": "god",
+      "filter": "acompressor=threshold=0.112:ratio=4:attack=8:release=90:makeup=2.6:knee=2.2:detection=rms,alimiter=limit=0.75:level=false:attack=7:release=80",
+      "at": "2026-09-01T20:39:49.735Z"
+    },
+    "god/mark-4-39.mp3": {
+      "size": 312885,
+      "mtime": 1788293295597,
+      "kind": "god",
+      "filter": "acompressor=threshold=0.112:ratio=4:attack=8:release=90:makeup=2.6:knee=2.2:detection=rms,alimiter=limit=0.75:level=false:attack=7:release=80",
+      "at": "2026-09-01T20:39:49.735Z"
+    },
+    "god/matthew-11-28.mp3": {
+      "size": 176212,
+      "mtime": 1788293295609,
+      "kind": "god",
+      "filter": "acompressor=threshold=0.112:ratio=4:attack=8:release=90:makeup=2.6:knee=2.2:detection=rms,alimiter=limit=0.75:level=false:attack=7:release=80",
+      "at": "2026-09-01T20:39:49.735Z"
+    },
+    "god/matthew-11-29.mp3": {
+      "size": 281538,
+      "mtime": 1788293295717,
+      "kind": "god",
+      "filter": "acompressor=threshold=0.112:ratio=4:attack=8:release=90:makeup=2.6:knee=2.2:detection=rms,alimiter=limit=0.75:level=false:attack=7:release=80",
+      "at": "2026-09-01T20:39:49.735Z"
+    },
+    "god/matthew-28-20.mp3": {
+      "size": 137969,
+      "mtime": 1788293295641,
+      "kind": "god",
+      "filter": "acompressor=threshold=0.112:ratio=4:attack=8:release=90:makeup=2.6:knee=2.2:detection=rms,alimiter=limit=0.75:level=false:attack=7:release=80",
+      "at": "2026-09-01T20:39:49.735Z"
+    },
+    "god/matthew-3-17.mp3": {
+      "size": 200036,
+      "mtime": 1788293295733,
+      "kind": "god",
+      "filter": "acompressor=threshold=0.112:ratio=4:attack=8:release=90:makeup=2.6:knee=2.2:detection=rms,alimiter=limit=0.75:level=false:attack=7:release=80",
+      "at": "2026-09-01T20:39:49.735Z"
+    },
+    "god/matthew-4-17.mp3": {
+      "size": 210067,
+      "mtime": 1788293295821,
+      "kind": "god",
+      "filter": "acompressor=threshold=0.112:ratio=4:attack=8:release=90:makeup=2.6:knee=2.2:detection=rms,alimiter=limit=0.75:level=false:attack=7:release=80",
+      "at": "2026-09-01T20:39:49.735Z"
+    },
+    "god/matthew-4-19.mp3": {
+      "size": 156777,
+      "mtime": 1788293295809,
+      "kind": "god",
+      "filter": "acompressor=threshold=0.112:ratio=4:attack=8:release=90:makeup=2.6:knee=2.2:detection=rms,alimiter=limit=0.75:level=false:attack=7:release=80",
+      "at": "2026-09-01T20:39:49.735Z"
+    },
+    "god/matthew-4-4.mp3": {
+      "size": 248310,
+      "mtime": 1788293295917,
+      "kind": "god",
+      "filter": "acompressor=threshold=0.112:ratio=4:attack=8:release=90:makeup=2.6:knee=2.2:detection=rms,alimiter=limit=0.75:level=false:attack=7:release=80",
+      "at": "2026-09-01T20:39:49.735Z"
+    },
+    "god/matthew-5-3.mp3": {
+      "size": 195648,
+      "mtime": 1788293295949,
+      "kind": "god",
+      "filter": "acompressor=threshold=0.112:ratio=4:attack=8:release=90:makeup=2.6:knee=2.2:detection=rms,alimiter=limit=0.75:level=false:attack=7:release=80",
+      "at": "2026-09-01T20:39:49.735Z"
+    },
+    "god/matthew-6-33.mp3": {
+      "size": 214456,
+      "mtime": 1788293296041,
+      "kind": "god",
+      "filter": "acompressor=threshold=0.112:ratio=4:attack=8:release=90:makeup=2.6:knee=2.2:detection=rms,alimiter=limit=0.75:level=false:attack=7:release=80",
+      "at": "2026-09-01T20:39:49.735Z"
+    },
+    "god/matthew-6-34.mp3": {
+      "size": 281538,
+      "mtime": 1788293296053,
+      "kind": "god",
+      "filter": "acompressor=threshold=0.112:ratio=4:attack=8:release=90:makeup=2.6:knee=2.2:detection=rms,alimiter=limit=0.75:level=false:attack=7:release=80",
+      "at": "2026-09-01T20:39:49.735Z"
+    },
+    "god/matthew-7-7.mp3": {
+      "size": 289061,
+      "mtime": 1788293296209,
+      "kind": "god",
+      "filter": "acompressor=threshold=0.112:ratio=4:attack=8:release=90:makeup=2.6:knee=2.2:detection=rms,alimiter=limit=0.75:level=false:attack=7:release=80",
+      "at": "2026-09-01T20:39:49.735Z"
+    },
+    "god/matthew-9-12.mp3": {
+      "size": 178720,
+      "mtime": 1788293296109,
+      "kind": "god",
+      "filter": "acompressor=threshold=0.112:ratio=4:attack=8:release=90:makeup=2.6:knee=2.2:detection=rms,alimiter=limit=0.75:level=false:attack=7:release=80",
+      "at": "2026-09-01T20:39:49.735Z"
+    },
+    "god/psalm-46-10.mp3": {
+      "size": 140477,
+      "mtime": 1788293296221,
+      "kind": "god",
+      "filter": "acompressor=threshold=0.112:ratio=4:attack=8:release=90:makeup=2.6:knee=2.2:detection=rms,alimiter=limit=0.75:level=false:attack=7:release=80",
+      "at": "2026-09-01T20:39:49.735Z"
+    },
+    "god/revelation-21-5.mp3": {
+      "size": 126057,
+      "mtime": 1788293296213,
+      "kind": "god",
+      "filter": "acompressor=threshold=0.112:ratio=4:attack=8:release=90:makeup=2.6:knee=2.2:detection=rms,alimiter=limit=0.75:level=false:attack=7:release=80",
+      "at": "2026-09-01T20:39:49.735Z"
+    },
+    "god/revelation-22-13.mp3": {
+      "size": 205052,
+      "mtime": 1788293296221,
+      "kind": "god",
+      "filter": "acompressor=threshold=0.112:ratio=4:attack=8:release=90:makeup=2.6:knee=2.2:detection=rms,alimiter=limit=0.75:level=false:attack=7:release=80",
+      "at": "2026-09-01T20:39:49.735Z"
+    },
+    "god/revelation-3-20.mp3": {
+      "size": 378087,
+      "mtime": 1788293296521,
+      "kind": "god",
+      "filter": "acompressor=threshold=0.112:ratio=4:attack=8:release=90:makeup=2.6:knee=2.2:detection=rms,alimiter=limit=0.75:level=false:attack=7:release=80",
+      "at": "2026-09-01T20:39:49.735Z"
+    },
+    "sermon/sermon-augustine-late.mp3": {
+      "size": 828229,
+      "mtime": 1788293296913,
+      "kind": "sweet",
+      "filter": "acompressor=threshold=0.125:ratio=2.8:attack=12:release=110:makeup=2.4:knee=2.5:detection=rms,alimiter=limit=0.75:level=false:attack=7:release=80",
+      "at": "2026-09-01T20:39:49.735Z"
+    },
+    "sermon/sermon-chrysostom-hospital.mp3": {
+      "size": 554883,
+      "mtime": 1788293296725,
+      "kind": "sweet",
+      "filter": "acompressor=threshold=0.125:ratio=2.8:attack=12:release=110:makeup=2.4:knee=2.5:detection=rms,alimiter=limit=0.75:level=false:attack=7:release=80",
+      "at": "2026-09-01T20:39:49.735Z"
+    },
+    "sermon/sermon-edwards-enjoy.mp3": {
+      "size": 803778,
+      "mtime": 1788293296953,
+      "kind": "sweet",
+      "filter": "acompressor=threshold=0.125:ratio=2.8:attack=12:release=110:makeup=2.4:knee=2.5:detection=rms,alimiter=limit=0.75:level=false:attack=7:release=80",
+      "at": "2026-09-01T20:39:49.735Z"
+    },
+    "sermon/sermon-kempis-trinity.mp3": {
+      "size": 769296,
+      "mtime": 1788293297217,
+      "kind": "sweet",
+      "filter": "acompressor=threshold=0.125:ratio=2.8:attack=12:release=110:makeup=2.4:knee=2.5:detection=rms,alimiter=limit=0.75:level=false:attack=7:release=80",
+      "at": "2026-09-01T20:39:49.735Z"
+    },
+    "sermon/sermon-luther-faith.mp3": {
+      "size": 620712,
+      "mtime": 1788293297261,
+      "kind": "sweet",
+      "filter": "acompressor=threshold=0.125:ratio=2.8:attack=12:release=110:makeup=2.4:knee=2.5:detection=rms,alimiter=limit=0.75:level=false:attack=7:release=80",
+      "at": "2026-09-01T20:39:49.735Z"
+    },
+    "sermon/sermon-spurgeon-hold.mp3": {
+      "size": 825721,
+      "mtime": 1788293297549,
+      "kind": "sweet",
+      "filter": "acompressor=threshold=0.125:ratio=2.8:attack=12:release=110:makeup=2.4:knee=2.5:detection=rms,alimiter=limit=0.75:level=false:attack=7:release=80",
+      "at": "2026-09-01T20:39:49.735Z"
+    },
+    "sermon/sermon-wesley-grace.mp3": {
+      "size": 856441,
+      "mtime": 1788293297533,
+      "kind": "sweet",
+      "filter": "acompressor=threshold=0.125:ratio=2.8:attack=12:release=110:makeup=2.4:knee=2.5:detection=rms,alimiter=limit=0.75:level=false:attack=7:release=80",
+      "at": "2026-09-01T20:39:49.735Z"
+    },
+    "sermon/sermon-whitefield-come.mp3": {
+      "size": 638266,
+      "mtime": 1788293297597,
+      "kind": "sweet",
+      "filter": "acompressor=threshold=0.125:ratio=2.8:attack=12:release=110:makeup=2.4:knee=2.5:detection=rms,alimiter=limit=0.75:level=false:attack=7:release=80",
+      "at": "2026-09-01T20:39:49.735Z"
+    }
+  }
+}

@@ -1,0 +1,25 @@
+{
+  "timezone": "America/New_York",
+  "lastRun": "2026-09-01",
+  "runs": [
+    {
+      "date": "2026-09-01",
+      "added": 10,
+      "voiced": 20,
+      "failed": 0,
+      "refs": [
+        "Luke 4:18",
+        "Luke 5:32",
+        "Matthew 9:12",
+        "Matthew 11:29",
+        "Luke 6:31",
+        "Matthew 9:36",
+        "Mark 10:27",
+        "John 3:17",
+        "John 3:3",
+        "Luke 19:10"
+      ],
+      "nextGift": []
+    }
+  ]
+}
